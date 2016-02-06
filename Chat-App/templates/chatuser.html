@@ -1,0 +1,83 @@
+
+<section>
+	<ion-side-menus>
+		<ion-side-menu-content>
+                    <ion-header-bar class="bar bar-header">
+                            <div class="ion-header" style="width: 100%">
+                                <div class="">
+                             <button class="button button-icon icon ion-android-arrow-back" ng-click="myGoBack()"></button>
+                                    
+                                </div>
+                                <button class="button button-icon icon ion-android-more-vertical toggle-class-left" ng-click="toggleSideBar()"></button>
+                               
+                                </div>	 
+			</ion-header-bar>
+			<ion-content>
+                            <div class="padding-left-chat">
+                                <span class="other-user-chat">
+                                Hiii
+                                </span>
+                           
+                            </div>
+                            <div class="float-right padding-right-chat">
+                                <span class="my-chat">
+                                Hello
+                                </span>
+                            </div>
+                            <div class="padding-left-chat">
+                                <span class="other-user-chat">
+                                Howz you..?
+                                </span>
+                            </div>
+                            <div class="float-right padding-right-chat">
+                                <span class="my-chat">
+                                I am fine
+                                </span>
+                            </div>
+                            <div class="padding-left-chat">
+                                <span class="other-user-chat">
+                                Can we meet on monday..?
+                                </span>
+                            </div>
+                            <div class="float-right padding-right-chat">
+                                <span class="my-chat">
+                                Yes sure anything special
+                                </span>
+                            </div>
+                            <div class="padding-left-chat">
+                                <span class="other-user-chat">
+                                no casual met up
+                                </span>
+                            </div>
+                            <div class="float-right padding-right-chat">
+                                <span class="my-chat">
+                                okey will see you on monday..
+                                </span>
+                            </div>
+		  </ion-content>
+                    <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
+                        <span class="ion-images" style="font-size: 30px;cursor: pointer"></span>
+      <label class="item-input-wrapper custom-input-wrapper-text-message">
+        <input type="text" placeholder="Type your message" class="ng-valid ng-touched ng-dirty" style="color: black;font-size: 16px;">
+      </label>
+      <button class="button button-clear send-message-class" ng-click="sendMessage()">
+        Send
+      </button>
+    </ion-footer-bar>
+		</ion-side-menu-content>
+
+		<ion-side-menu side="right">
+			<ion-header-bar>
+				<h1 class="title">Settings</h1>
+				
+			</ion-header-bar>
+			<ion-content scroll="false">
+				<ion-list>
+					<ion-item>View Contact</ion-item>
+					<ion-item>Call</ion-item>
+					<ion-item>Block</ion-item>
+				</ion-list>
+			</ion-content>
+		</ion-side-menu>
+	</ion-side-menus>
+	</section>

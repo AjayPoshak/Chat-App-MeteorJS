@@ -1,0 +1,213 @@
+
+.logo img {
+  height: 150px;
+  width: 33%;
+  margin-bottom: 30px;
+  float:left;
+  margin-left: 33%;
+}
+.welcome-img img {
+  height: 25px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.toggle-class-left
+{
+    margin-top: -30px;
+    float: right;
+}
+.group-image-height
+{
+    width: 60px;
+    height: 60px;
+}
+*::-webkit-input-placeholder {
+    color: black !important;
+}
+*::-moz-placeholder {
+ color: #000 !important;
+}
+.padding-left-20px
+{
+    padding-left: 20px;
+}
+.margin-top-10
+{
+    margin-top: 10px;
+}
+.item-center-list
+{
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -moz-box !important;
+    display: -moz-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -webkit-box-align: center !important;
+    -ms-flex-align: center !important;
+    -webkit-align-items: center !important;
+    -moz-align-items: center !important;
+    align-items: center !important;
+    position: absolute !important;
+    top: 0 !important;
+    height: 100% !important;
+}
+.add-group-custom-text-class
+{
+    margin-top: 20px;
+    color: red;
+}
+.group-text-area
+{
+    width: 80% !important;
+    margin-left: 80px;
+    margin-top: -50px;
+    background: white !important;
+    border-bottom-color: black !important;
+    color: black !important;
+}
+.other-user-chat
+{
+    background: #007AFF !important;
+    display: inline-block !important;
+    color: white !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    text-align: left !important;
+    max-width: 240px !important;
+    margin-top: 35px !important;
+}
+.text-align
+{
+    text-align: center;
+}
+.login-user-name-color
+{
+    background: #F15A25 !important;
+    width: 300px !important;
+    margin: 0 auto !important;
+}
+.padding-left-chat
+{
+    padding-left: 15px;
+}
+.padding-right-chat
+{
+    padding-right: 15px;
+}
+.my-chat
+{
+    background: #F15A25 !important;
+    display: inline-block !important;
+    color: white !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    margin-top: 35px !important;
+    text-align: left !important;
+    max-width: 240px !important;
+}
+.custom-input-wrapper-text-message
+{
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    margin-left: 20px !important;
+    margin-right: 10px !important;
+}
+.send-message-class
+{
+    background: #F15A25 !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    font-size: 16px !important;
+    padding-top: 0px;
+}
+.search-area-class
+{
+    margin-top: -35px;
+    width: 95% !important;
+    margin-left: 42px;
+    background: #F15A25 !important;
+}
+.username img {
+  height: 15px;
+  width: 90px;
+}
+.password img {
+  height: 15px;
+  width: 90px;
+}
+.forgot-password a {
+  color: #ffa500;
+  /*color: rgba(853, 292, 885, 680);*/
+  font-weight: bold;
+  float: right;
+  font-size: 18px;
+  text-decoration: none;
+}
+#login-button {
+  background-image: url('images/Rounded Rectangle 2.png') !important;
+  background-position: -3px;
+  height: 45px;
+  width: 100%;
+  margin-top: 30%;
+}
+#login-text {
+  color: #fff;
+}
+*::-webkit-input-placeholder {
+  color: #000 !important;
+}
+*::-moz-placeholder {
+ color: #000 !important;
+}
+input[type="text"], input[type="password"] {
+  border-bottom: 1px solid #fff;
+  background: #848484;
+  padding-left: 10px;
+  width: 100%;
+  color: #fff;
+}
+.new-group img {
+  margin-top: 13%;
+  height: 55px;
+  border-radius: 50%;
+
+}
+.group-back-button
+{
+    font-size: 30px !important;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+    padding-left: 20px !important;
+    cursor:pointer !important;
+}
+.new-group {
+  margin-left: 2%;
+}
+
+.bar-header {
+  background: #F15A25;
+}
+.h1 {
+  color: #fff;
+}
+.display-inline {
+	display: inline;
+}
+.time-stamp {
+	font-size: 75%;
+}
+.float-right {
+	float: right;
+}
+.login-custom-class
+{
+    width: 300px !important;
+    height: 40px !important;
+    margin-top: 40px !important;
+    background:#3b5998 !important;
+    border-color:#3b5998 !important;
+    border: 0;
+    color: white;
+    font-size: 20px;
+}
