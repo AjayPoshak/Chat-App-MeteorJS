@@ -43,12 +43,12 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
     $scope.changePath = function ()
     {
         setTimeout(function () {
-            console.log('change path');
             $location.path('/chatuser');
             $scope.$apply();
         }, 80);
 
     };
+    
 });
 /* 
  *  Author-Himanshu

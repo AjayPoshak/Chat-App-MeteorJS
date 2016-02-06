@@ -13,7 +13,6 @@
 }
 .toggle-class-left
 {
-    margin-top: -30px;
     float: right;
 }
 .group-image-height
@@ -123,10 +122,21 @@
 }
 .search-area-class
 {
-    margin-top: -35px;
-    width: 95% !important;
+    margin-top: -32px;
+    width: 80% !important;
     margin-left: 42px;
-    background: #F15A25 !important;
+    background: #fff !important;
+    border:  2px solid #DCDCDC !important;
+    color: #000 !important;
+}
+.chat-user-setting
+{
+    margin-top: -36px;
+    margin-right: 30px;
+}
+.button-user-image
+{
+    background:url(images/satya.jpg) no-repeat;
 }
 .username img {
   height: 15px;
@@ -186,7 +196,7 @@ input[type="text"], input[type="password"] {
 }
 
 .bar-header {
-  background: #F15A25;
+  background: #F16A24;
 }
 .h1 {
   color: #fff;
@@ -210,4 +220,63 @@ input[type="text"], input[type="password"] {
     border: 0;
     color: white;
     font-size: 20px;
+}
+.button-setting
+{
+    background:url(images/Settings_32.png) no-repeat;
+    
+}
+.button-search
+{
+     background:url(images/Search_32.png) no-repeat;
+   
+}
+.button-user
+{
+     background:url(images/Main_Contacts_32.png) no-repeat;
+    
+}
+.button-group
+{
+     background:url(images/Group_32.png) no-repeat;
+    
+}
+.button-back
+{
+    background:url(images/Back_32.png) no-repeat;
+    cursor: pointer;
+    border: none;
+    height: 32px;
+    width: 32px;
+}
+.custom-button-group
+{
+    cursor: pointer;
+    border: none;
+    height: 32px;
+    width: 32px;
+    margin-left: 25px;
+}
+.tick-image-class
+{
+    height: 12px;
+    padding-right: 5px;
+}
+.a-class-border
+{
+    border-bottom: 2px solid #DCDCDC
+}
+.chat-user-image
+{
+    height: 32px;
+    border-radius: 50%;
+    margin-left: 40px;
+}
+.chat-user-name
+{
+    background: #F16A24 !important;
+    color: white !important;
+    font-size: 17px !important;
+    margin-top: -3px !important;
+    font-weight: 500 !important;
 }
