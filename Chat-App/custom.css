@@ -224,22 +224,22 @@ input[type="text"], input[type="password"] {
 .button-setting
 {
     background:url(images/Settings_32.png) no-repeat;
-    
+
 }
 .button-search
 {
      background:url(images/Search_32.png) no-repeat;
-   
+
 }
 .button-user
 {
      background:url(images/Main_Contacts_32.png) no-repeat;
-    
+
 }
 .button-group
 {
      background:url(images/Group_32.png) no-repeat;
-    
+
 }
 .button-back
 {

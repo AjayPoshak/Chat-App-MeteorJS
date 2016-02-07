@@ -1,86 +1,97 @@
-
-<section>
-	<ion-side-menus>
-		<ion-side-menu-content>
-                    <ion-header-bar class="bar bar-header">
-                            <div class="ion-header" style="width: 100%">
-                                <div class="">
-                             <button class="button button-icon icon button-back" ng-click="myGoBack()"></button>
-                             <img src="images/satya.jpg" class="chat-user-image">
-                             <button class="button chat-user-name">Satya</button>
-                                </div>
-                                
-                                    
-                                <button class="button button-icon icon button-setting custom-button-group toggle-class-left chat-user-setting" ng-click="toggleSideBar()"></button>
-                               
-                                </div>	 
+<style>
+	.grey-background {
+		background: #848484;
+		border-color: #848484;
+		height: 70%;
+		width: 100%;
+		vertical-align: middle;
+	}
+	.list {
+		height: 31.5%;
+	}
+	.settings-images {
+		display: block;
+		margin: auto;
+	}
+	.settings-text {
+		display: block;
+		text-align: center;
+		color: #fff;
+	}
+	#settings-popup {
+		margin-top: 44px;
+		position: relative;
+		height: 100%;
+	}
+</style>
+<section style="height: 100%;">
+    	<ion-header-bar class="bar bar-header">
+	      <div class="ion-header" style="width: 100%">
+	      	<div class="">
+	       		<button class="button button-icon icon button-back" ng-click="myGoBack()"></button>
+	       		<img src="images/satya.jpg" class="chat-user-image">
+	       		<button class="button chat-user-name">Satya</button>
+	        </div>
+					<button class="button button-icon icon button-setting custom-button-group
+					 toggle-class-left chat-user-setting" ng-click="toggleSideBar()"></button>
+        </div>
 			</ion-header-bar>
 			<ion-content>
-                            <div class="padding-left-chat">
-                                <span class="other-user-chat">
-                                Hiii
-                                </span>
-                           
-                            </div>
-                            <div class="float-right padding-right-chat">
-                                <span class="my-chat">
-                                Hello
-                                </span>
-                            </div>
-                            <div class="padding-left-chat">
-                                <span class="other-user-chat">
-                                Howz you..?
-                                </span>
-                            </div>
-                            <div class="float-right padding-right-chat">
-                                <span class="my-chat">
-                                I am fine
-                                </span>
-                            </div>
-                            <div class="padding-left-chat">
-                                <span class="other-user-chat">
-                                Can we meet on monday..?
-                                </span>
-                            </div>
-                            <div class="float-right padding-right-chat">
-                                <span class="my-chat">
-                                Yes sure anything special
-                                </span>
-                            </div>
-                            <div class="padding-left-chat">
-                                <span class="other-user-chat">
-                                no casual met up
-                                </span>
-                            </div>
-                            <div class="float-right padding-right-chat">
-                                <span class="my-chat">
-                                okey will see you on monday..
-                                </span>
-                            </div>
+	      <div class="padding-left-chat">
+	      	<span class="other-user-chat">Hiii</span>
+	      </div>
+	      <div class="float-right padding-right-chat">
+	      	<span class="my-chat">Hello</span>
+	      </div>
+	      <div class="padding-left-chat">
+	      	<span class="other-user-chat">Howz you..?</span>
+	      </div>
+	      <div class="float-right padding-right-chat">
+	      	<span class="my-chat">I am fine</span>
+	      </div>
+	      <div class="padding-left-chat">
+	      	<span class="other-user-chat">Can we meet on monday..?</span>
+	      </div>
+	      <div class="float-right padding-right-chat">
+	      	<span class="my-chat">Yes sure anything special</span>
+	      </div>
+	      <div class="padding-left-chat">
+	      	<span class="other-user-chat">no casual met up</span>
+	      </div>
+	      <div class="float-right padding-right-chat">
+	      	<span class="my-chat">okey will see you on monday..</span>
+	      </div>
 		  </ion-content>
-                    <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
-                        <span class="ion-images" style="font-size: 30px;cursor: pointer"></span>
+      <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
+      <span class="ion-images" style="font-size: 30px;cursor: pointer"></span>
       <label class="item-input-wrapper custom-input-wrapper-text-message">
-        <input type="text" placeholder="Type your message" class="ng-valid ng-touched ng-dirty" style="color: black;font-size: 16px;">
+        <input type="text" placeholder="Type your message" class="ng-valid ng-touched ng-dirty"
+				 style="color: black;font-size: 16px;">
       </label>
-      <button class="button button-clear send-message-class" ng-click="sendMessage()">
-        Send
-      </button>
+      <button class="button button-clear send-message-class" ng-click="sendMessage()">Send</button>
     </ion-footer-bar>
-		</ion-side-menu-content>
 
-		<ion-side-menu side="right">
-			<ion-header-bar>
-				<h1 class="title">Settings</h1>
-				
-			</ion-header-bar>
-			<ion-content scroll="false">
-				<ion-list>
-					<ion-item>View Contact</ion-item>
-					<ion-item>Call</ion-item>
-					<ion-item>Block</ion-item>
-				</ion-list>
-			</ion-content>
-		</ion-side-menu>
-	</ion-side-menus>
+	<div class="float-right" id="settings-popup" ng-show="displaySideBar">
+		<ion-list style="background: #848484; height: 100%;">
+			<ion-item class="grey-background">
+				<img class="settings-images" src="images/Main_Contacts_32.png" alt="contact info" />
+				<span class="settings-text">Contact Info</span>
+			</ion-item>
+			<ion-item class="grey-background">
+				<img class="settings-images" src="images/Settings_Call_32.png" alt="call" />
+				<span class="settings-text">Call</span>
+			</ion-item>
+			<ion-item class="grey-background">
+				<img class="settings-images" src="images/Block_32.png" alt="block" />
+				<span class="settings-text">Block</span>
+			</ion-item>
+			<ion-item class="grey-background">
+				<img class="settings-images" src="images/Settings_Tool_32.png" alt="settings" />
+				<span class="settings-text">Settings</span>
+			</ion-item>
+		</ion-list>
+	</div>
 	</section>
+<script>
+
+</script>
