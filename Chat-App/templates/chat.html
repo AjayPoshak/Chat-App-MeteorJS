@@ -1,12 +1,18 @@
-<section>
-    <ion-side-menus>
-        <ion-side-menu-content>
+<style>
+.list {
+  height: 31.5%;
+}
+
+</style>
+<section style="height: 100%;">
+
             <ion-header-bar class="bar bar-header">
                 <div class="ion-header" style="width: 100%">
                     <div class="" ng-hide="isSerachtrue">
-                        <button class="button button-icon icon button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-click="toggleSideBar()"></button>
+                        <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
+                        <button class="button button-icon icon  button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
                         <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="addNewUser()"></button>
-                        <button class="button button-icon icon button-user custom-button-group toggle-class-left" ng-click="()"></button>
+                        <button class="button button-icon icon button-user custom-button-group toggle-class-left" ></button>
                         <button class="button button-icon icon button-search custom-button-group toggle-class-left" ng-click="showsearchBar()"></button>
 
                     </div>
@@ -14,10 +20,10 @@
 
                         <button class="button button-icon icon button-back" ng-click="hideSerarchbar()"></button>
 
-                        <input type="text" class="search-area-class js-filter  form-control" placeholder="Search...">   
+                        <input type="text" class="search-area-class js-filter  form-control" placeholder="Search...">
                     </div>
 
-                </div>	 
+                </div>
             </ion-header-bar>
             <ion-content>
                 <ion-list class="js-dynamitable">
@@ -58,27 +64,31 @@
                         <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>Have you tried my new EP2... ;)</p>
                     </a>
                 </ion-list>
-                
+
             </ion-content>
             <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer" style="background:#848484;">
                 <div class="" style="text-align: center;width: 100%;">
                     <p style="margin-top: 10px;">Advt.</p>
                 </div>
                 </ion-footer-bar>
-        </ion-side-menu-content>
-
-        <ion-side-menu side="right">
-            <ion-header-bar>
-                <h1 class="title">Settings</h1>
-
-            </ion-header-bar>
-            <ion-content scroll="false">
-                <ion-list>
-                    <ion-item>View Contact</ion-item>
-                    <ion-item>Call</ion-item>
-                    <ion-item>Block</ion-item>
-                </ion-list>
-            </ion-content>
-        </ion-side-menu>
-    </ion-side-menus>
+        <div class="float-right" id="settings-popup" ng-show="displaySideBar">
+  		<ion-list style="background: #848484; height: 100%;">
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Main_Contacts_32.png" alt="contact info" />
+  				<span class="settings-text">Contact Info</span>
+  			</ion-item>
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Settings_Call_32.png" alt="call" />
+  				<span class="settings-text">Call</span>
+  			</ion-item>
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Block_32.png" alt="block" />
+  				<span class="settings-text">Block</span>
+  			</ion-item>
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Settings_Tool_32.png" alt="settings" />
+  				<span class="settings-text">Settings</span>
+  			</ion-item>
+  		</ion-list>
+  	</div>
 </section>

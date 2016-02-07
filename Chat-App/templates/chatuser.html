@@ -1,74 +1,126 @@
 <style>
-	.grey-background {
-		background: #848484;
-		border-color: #848484;
-		height: 70%;
-		width: 100%;
-		vertical-align: middle;
-	}
+
 	.list {
 		height: 31.5%;
 	}
-	.settings-images {
-		display: block;
-		margin: auto;
-	}
-	.settings-text {
-		display: block;
-		text-align: center;
-		color: #fff;
-	}
-	#settings-popup {
-		margin-top: 44px;
-		position: relative;
-		height: 100%;
-	}
-</style>
+
+	::-webkit-input-placeholder {
+    color:    #000;
+}
+:-moz-placeholder {
+    color:    #000;
+}
+.chat {
+    width: 100%;
+}
+
+.bubble{
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #B2B2B2;
+    display: inline-block;
+    padding: 10px 18px;
+    position: relative;
+    vertical-align: top;
+}
+
+.bubble::before {
+    background-color: #F2F2F2;
+    content: "\00a0";
+    display: block;
+    height: 16px;
+    position: absolute;
+    top: 11px;
+    transform:             rotate( 29deg ) skew( -35deg );
+        -moz-transform:    rotate( 29deg ) skew( -35deg );
+        -ms-transform:     rotate( 29deg ) skew( -35deg );
+        -o-transform:      rotate( 29deg ) skew( -35deg );
+        -webkit-transform: rotate( 29deg ) skew( -35deg );
+    width:  20px;
+}
+
+.me {
+    float: left;
+    margin: 5px 45px 5px 20px;
+		background: #FFDDAB !important;
+		max-width: 60%;
+}
+
+.me::before {
+    box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4 );
+    left: -9px;
+		background: #FFDDAB !important;
+}
+
+.you {
+    float: right;
+    margin: 5px 20px 5px 45px;
+		background: #DCDCDC !important;
+		max-width: 60%;
+		display:block;
+}
+
+.you::before {
+    box-shadow: 2px -2px 2px 0 rgba( 178, 178, 178, .4 );
+    right: -9px;
+		background: #DCDCDC !important;
+}
+
+
+	</style>
 <section style="height: 100%;">
     	<ion-header-bar class="bar bar-header">
-	      <div class="ion-header" style="width: 100%">
-	      	<div class="">
-	       		<button class="button button-icon icon button-back" ng-click="myGoBack()"></button>
-	       		<img src="images/satya.jpg" class="chat-user-image">
-	       		<button class="button chat-user-name">Satya</button>
-	        </div>
-					<button class="button button-icon icon button-setting custom-button-group
-					 toggle-class-left chat-user-setting" ng-click="toggleSideBar()"></button>
-        </div>
-			</ion-header-bar>
+	      <button class="button button-icon icon button-back" ng-click="myGoBack()"></button>
+	      <img src="images/sundar.jpg" class="chat-user-image">
+	      <span class="chat-user-name">Sundar</span>
+				<button class="button button-icon icon custom-button-group close-button-setting
+					 toggle-class-left chat-user-setting" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
+				 <button class="button button-icon icon custom-button-group button-setting
+ 					 toggle-class-left chat-user-setting" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
+      </ion-header-bar>
 			<ion-content>
-	      <div class="padding-left-chat">
-	      	<span class="other-user-chat">Hiii</span>
-	      </div>
-	      <div class="float-right padding-right-chat">
-	      	<span class="my-chat">Hello</span>
-	      </div>
-	      <div class="padding-left-chat">
-	      	<span class="other-user-chat">Howz you..?</span>
-	      </div>
-	      <div class="float-right padding-right-chat">
-	      	<span class="my-chat">I am fine</span>
-	      </div>
-	      <div class="padding-left-chat">
-	      	<span class="other-user-chat">Can we meet on monday..?</span>
-	      </div>
-	      <div class="float-right padding-right-chat">
-	      	<span class="my-chat">Yes sure anything special</span>
-	      </div>
-	      <div class="padding-left-chat">
-	      	<span class="other-user-chat">no casual met up</span>
-	      </div>
-	      <div class="float-right padding-right-chat">
-	      	<span class="my-chat">okey will see you on monday..</span>
-	      </div>
-		  </ion-content>
+				<div class="chat">
+					<div style="width: 100%;">
+						<div class="bubble me">Hello there!</div>
+					</div>
+					<div style="width: 100%;">
+						<div class="bubble you">Hi. I'm an expandeable chat box with box shadow. How are you? I expand horizontally and vertically, as you can see here.</div>
+					</div>
+					<div style="width: 100%;">
+						<div class="bubble me">Awesome.</div>
+					</div>
+					<div style="width: 100%;">
+						<div class="bubble you">The layout of links in system messages in the chatlog pane when the customer hovers the mouse over the link.</div>
+					</div>
+				</div>
+				<div class="attachment-popup" ng-show="displayAttachment">
+					<div>
+						<span class="float-left" style="border-right: 2px solid #848484;">
+							<img src="images/Attach_Photo_64.png" alt="attach photo" />
+						</span>
+						<span class="float-right">
+							<img src="images/Attach_Contacts_64.png" alt="attach contact" />
+						</span>
+					</div>
+					<div style="border-top: none;">
+						<span class="float-left" style="border-right: 2px solid #848484;">
+							<img src="images/Attach_Camera_64.png" alt="take a photo" />
+						</span>
+						<span>
+						</span>
+					</div>
+				</div>
+
+			</ion-content>
+
       <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
-      <span class="ion-images" style="font-size: 30px;cursor: pointer"></span>
-      <label class="item-input-wrapper custom-input-wrapper-text-message">
-        <input type="text" placeholder="Type your message" class="ng-valid ng-touched ng-dirty"
-				 style="color: black;font-size: 16px;">
-      </label>
-      <button class="button button-clear send-message-class" ng-click="sendMessage()">Send</button>
+				<button class="button button-icon icon button-show-attachemnt"
+				ng-click="showAttachment()" style="width:20%; margin-left: -3%; margin-right: -8%;"></button>
+				<input type="text" class="send-message-text-area" placeholder="Type message">
+				<button type="submit" class="emoticons-class"><img src="images/emoticon85.png" alt="Arrow Icon"></button>
+      <button class="button button-clear" style="margin-left:0; width: 20%; margin-right: -3%;" ng-click="sendMessage()">
+				<img src="images/Send_32.png" alt="send" />
+			</button>
     </ion-footer-bar>
 
 	<div class="float-right" id="settings-popup" ng-show="displaySideBar">
@@ -92,6 +144,3 @@
 		</ion-list>
 	</div>
 	</section>
-<script>
-
-</script>

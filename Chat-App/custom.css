@@ -67,14 +67,14 @@
 }
 .other-user-chat
 {
-    background: #007AFF !important;
+    background: #DCDCDC !important;
     display: inline-block !important;
-    color: white !important;
+    color: #000 !important;
     padding: 10px !important;
-    border-radius: 10px !important;
     text-align: left !important;
     max-width: 240px !important;
     margin-top: 35px !important;
+    border: 3px solid #848484;
 }
 .text-align
 {
@@ -96,14 +96,12 @@
 }
 .my-chat
 {
-    background: #F15A25 !important;
-    display: inline-block !important;
-    color: white !important;
+    background: #FFDDAB !important;
     padding: 10px !important;
-    border-radius: 10px !important;
     margin-top: 35px !important;
     text-align: left !important;
     max-width: 240px !important;
+    border: 3px solid #F15A25;
 }
 .custom-input-wrapper-text-message
 {
@@ -131,8 +129,8 @@
 }
 .chat-user-setting
 {
-    margin-top: -36px;
-    margin-right: 30px;
+    margin-top: 0;
+    margin-left: 32% !important;
 }
 .button-user-image
 {
@@ -210,6 +208,9 @@ input[type="text"], input[type="password"] {
 .float-right {
 	float: right;
 }
+.float-left {
+  float: left;
+}
 .login-custom-class
 {
     width: 300px !important;
@@ -224,7 +225,9 @@ input[type="text"], input[type="password"] {
 .button-setting
 {
     background:url(images/Settings_32.png) no-repeat;
-
+}
+.close-button-setting {
+  background: url(images/Settings_Close_32.png) no-repeat;
 }
 .button-search
 {
@@ -241,6 +244,12 @@ input[type="text"], input[type="password"] {
      background:url(images/Group_32.png) no-repeat;
 
 }
+.button-show-attachemnt
+{
+  background:url(images/Attach_32.png) no-repeat !important;
+  height: 32px;
+  width: 32px;
+}
 .button-back
 {
     background:url(images/Back_32.png) no-repeat;
@@ -248,6 +257,12 @@ input[type="text"], input[type="password"] {
     border: none;
     height: 32px;
     width: 32px;
+}
+.emoticons-class
+{
+    height: 34px;
+    background: #fff;
+    border: 1px solid #fff;
 }
 .custom-button-group
 {
@@ -262,21 +277,72 @@ input[type="text"], input[type="password"] {
     height: 12px;
     padding-right: 5px;
 }
+.send-message-text-area
+{
+    margin-left: 15px;
+    background: #fff !important;
+    border: 2px solid #848484 !important;
+    color: #000 !important;
+}
 .a-class-border
 {
     border-bottom: 2px solid #DCDCDC
 }
 .chat-user-image
 {
-    height: 32px;
+    height: 93%;
     border-radius: 50%;
-    margin-left: 40px;
+    margin-left: 5%;
 }
 .chat-user-name
 {
     background: #F16A24 !important;
     color: white !important;
-    font-size: 17px !important;
-    margin-top: -3px !important;
-    font-weight: 500 !important;
+    font-size: 1.5em !important;
+    margin-top: 2% !important;
+    font-weight: bold !important;
+    margin-left: 4%;
+}
+.attachment-popup {
+  /*margin-top: 18% !important;*/
+  z-index: 100;
+}
+.attachment-popup div {
+  width: 100%;
+  border: 2px solid #848484;
+  overflow: hidden;
+  border-left: none;
+  border-right: none;
+}
+
+.attachment-popup div span {
+  width: 50%;
+}
+
+.attachment-popup div span img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+}
+.settings-images {
+  display: block;
+  margin: auto;
+}
+.settings-text {
+  display: block;
+  text-align: center;
+  color: #fff;
+}
+#settings-popup {
+  margin-top: 44px;
+  position: relative;
+  height: 100%;
+}
+.grey-background {
+  background: #848484;
+  border-color: #848484;
+  height: 70%;
+  width: 100%;
+  vertical-align: middle;
 }

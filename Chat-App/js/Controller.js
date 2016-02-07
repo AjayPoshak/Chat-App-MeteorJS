@@ -14,7 +14,20 @@ app.controller('loginCtrl', function ($scope, $window, $rootScope, $location) {
 
 app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $location, $timeout, $ionicModal, $ionicSideMenuDelegate) {
 
-
+  $scope.displaySideBar = false;
+  $scope.popupClass='button-setting';
+    $scope.toggleSideBar = function () {
+        //$ionicSideMenuDelegate.toggleRight();
+        if($scope.displaySideBar){
+          console.log("Inside ChatCtrl...");
+          $scope.displaySideBar = false;
+          $scope.popupClass = 'button-setting';
+        }
+        else {
+        $scope.displaySideBar = true;
+        $scope.popupClass = 'close-button-setting';
+        }
+    };
     $scope.isSerachtrue = false;
 
 //to show search bar
@@ -32,10 +45,7 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
     };
     //for left toggle navigation
 
-    $scope.toggleSideBar = function () {
-        console.log("Inside function...");
-        $ionicSideMenuDelegate.toggleRight();
-    };
+    
     $scope.addNewUser = function ()
     {
         $location.path('addgroup');
@@ -59,31 +69,31 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
 
 app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location, $window, $ionicHistory, $ionicModal, $ionicSideMenuDelegate) {
   $scope.displaySideBar = false;
-  console.log("Inside Controller...displaySideBar::"+$scope.displaySideBar);
+  $scope.displayAttachment = false;
+
 //functionlity on back button
     $scope.myGoBack = function () {
         $location.path('/chat');
     };
-
+    $scope.popupClass='button-setting';
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
         if($scope.displaySideBar){
           $scope.displaySideBar = false;
-          console.log("displaySideBar::"+$scope.displaySideBar);
-
-
+          $scope.popupClass = 'button-setting';
         }
         else {
-
-          $scope.displaySideBar = true;
-          console.log("displaySideBar::"+$scope.displaySideBar);
-          /*console.log("Height of window in px::"+screen.availHeight);
-        	var popUpHeight = screen.availHeight - 88;
-        	console.log("Height of Popup::"+popUpHeight);
-        	console.log("height::"+document.getElementById("settings-popup").clientHeight);
-        	document.getElementById("settings-popup").style.height = popUpHeight+"px";
-        	console.log(document.getElementById("settings-popup").style.height);*/
+        $scope.displaySideBar = true;
+        $scope.popupClass = 'close-button-setting';
         }
+    };
+    $scope.showAttachment = function() {
+      if($scope.displayAttachment) {
+        $scope.displayAttachment = false;
+      }
+      else {
+        $scope.displayAttachment = true;
+      }
     };
     //This is the Ionic Popup
     $scope.showSideBar = function(){
