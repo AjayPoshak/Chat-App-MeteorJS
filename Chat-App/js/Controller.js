@@ -16,7 +16,7 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
 
 
     $scope.isSerachtrue = false;
-
+    $rootScope.isConatct = false;
 //to show search bar
     $scope.showsearchBar = function ()
     {
@@ -33,12 +33,11 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
     //for left toggle navigation
 
     $scope.toggleSideBar = function () {
-        console.log("Inside function...");
         $ionicSideMenuDelegate.toggleRight();
     };
-    $scope.addNewUser = function ()
+    $scope.goToGroup = function ()
     {
-        $location.path('addgroup');
+        $location.path('/group');
     }
     $scope.changePath = function ()
     {
@@ -48,7 +47,12 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
         }, 80);
 
     };
-    
+    //function to go to contact page
+
+    $scope.goToContact = function ()
+    {
+        $location.path('/contact');
+    }
 });
 /* 
  *  Author-Himanshu
@@ -61,8 +65,20 @@ app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location, 
 
 
 //functionlity on back button
+
     $scope.myGoBack = function () {
-        $location.path('/chat');
+        if ($rootScope.isConatct == '1')
+        {
+            $location.path('/contact');
+        }
+        else if($rootScope.isConatct == '2')
+        {
+            $location.path('/groupwiseuser');
+        }
+        else
+        {
+            $location.path('/chat');
+        }
     };
 
     $scope.toggleSideBar = function () {
@@ -84,6 +100,23 @@ app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location, 
 app.controller('groupCtrl', function ($scope, $rootScope, $location, $window) {
     //check whether user selected servieces or not
 
+
+    $scope.BacktoChat = function ()
+    {
+        $location.path('/chat');
+    };
+    $scope.CreateGroup = function ()
+    {
+        $location.path('/addgroup');
+    };
+
+    //expand group function
+
+    $scope.expandGroup = function ()
+    {
+        $location.path('/groupwiseuser')
+    }
+
 });
 /* 
  *  Author-Himanshu
@@ -102,17 +135,87 @@ app.controller('addgroupCtrl', function ($scope, $rootScope, $location, $window)
             $scope.isBlockDisabled = true;
         }
     }
-    $scope.backFunction = function ()
-    {
-        $location.path('/chat');
-    }
     $scope.setGroup = function ()
     {
         $scope.isBlockDisabled = true;
     }
+    
+    //function tp create group
     $scope.createGroup = function ()
+    {
+        $location.path('/chat');
+    };
+    $scope.BacktoGroup = function ()
+    {
+        $location.path('/group');
+    };
+});
+
+app.controller('contactCtrl', function ($scope, $rootScope, $location, $window) {
+    //check whether user selected servieces or not
+    //fuction for back button to go back to chat screen
+    $rootScope.isConatct ='1'
+    $scope.BacktoChat = function ()
+    {
+        $location.path('/chat');
+    };
+    $scope.changePath = function ()
+    {
+        $location.path('/chatuser');
+    };
+});
+
+app.controller('groupwiseuserCtrl', function ($scope, $rootScope, $location, $window) {
+    //check whether user selected servieces or not
+    //fuction for back button to go back to chat screen
+    //back to group functionality
+    $rootScope.isConatct='2';
+    $scope.BacktoGroup = function ()
+    {
+        $location.path('/group');
+    }
+
+    //edit group functionality
+    $scope.editGroup = function ()
+    {
+        $location.path('/editgroup')
+    }
+    //open chat of respective user
+    $scope.changePath = function()
+    {
+        $location.path('/chatuser');
+    }
+});
+
+app.controller('editgroupCtrl', function ($scope, $rootScope, $location, $window) {
+    //check whether user selected servieces or not
+    //fuction for back button to go back to chat screen
+    //back to group functionality
+    $scope.BacktoEditGroup = function ()
+    {
+        $location.path('/groupwiseuser')
+    }
+
+    //function for edit group page
+    $scope.addContact = function ()
+    {
+        $location.path('/addcontact');
+    }
+    $scope.SetGroup = function()
     {
         $location.path('/chat');
     }
 });
+
+app.controller('addcontactCtrl', function ($scope, $rootScope, $location, $window) {
+    //check whether user selected servieces or not
+    //fuction for back button to go back to chat screen
+    //back to group functionality
+    $scope.BacktoEditGroup = function ()
+    {
+        $location.path('/groupwiseuser');
+    };
+});
+
+
 
