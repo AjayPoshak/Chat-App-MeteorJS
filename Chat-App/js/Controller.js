@@ -14,7 +14,27 @@ app.controller('loginCtrl', function ($scope, $window, $rootScope, $location) {
 
 app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $location, $timeout, $ionicModal, $ionicSideMenuDelegate) {
 
+    $scope.displaySideBar = false;
+  $scope.popupClass='button-setting';
+    $scope.toggleSideBar = function () {
+        //$ionicSideMenuDelegate.toggleRight();
+        if($scope.displaySideBar){
+          
+          $scope.displaySideBar = false;
+          $scope.popupClass = 'button-setting';
+        }
+        else {
+        $scope.displaySideBar = true;
+        $scope.popupClass = 'close-button-setting';
+        }
+    };
+    $scope.isSerachtrue = false;
 
+    $scope.addNewUser = function ()
+    {
+        $location.path('addgroup');
+    };
+    
     $scope.isSerachtrue = false;
     $rootScope.isConatct = false;
 //to show search bar
@@ -31,10 +51,6 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
         $scope.isSerachtrue = false;
     };
     //for left toggle navigation
-
-    $scope.toggleSideBar = function () {
-        $ionicSideMenuDelegate.toggleRight();
-    };
     $scope.goToGroup = function ()
     {
         $location.path('/group');
@@ -61,9 +77,33 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
  */
 //function to validate email address
 
-app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location, $window, $ionicHistory, $ionicModal, $ionicSideMenuDelegate) {
+app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location,$ionicPopup, $window, $ionicHistory, $ionicModal, $ionicSideMenuDelegate) {
 
-
+$scope.displaySideBar = false;
+  
+//functionlity on back button
+    $scope.myGoBack = function () {
+        $location.path('/chat');
+    };
+    $scope.popupClass='button-setting';
+    $scope.toggleSideBar = function () {
+        //$ionicSideMenuDelegate.toggleRight();
+        if($scope.displaySideBar){
+          $scope.displaySideBar = false;
+          $scope.popupClass = 'button-setting';
+        }
+        else {
+        $scope.displaySideBar = true;
+        $scope.popupClass = 'close-button-setting';
+        }
+    };
+    
+    //This is the Ionic Popup
+    $scope.showSideBar = function(){
+        var myPopup = $ionicPopup.show({
+          template: ''
+        });
+    };
 //functionlity on back button
 
     $scope.myGoBack = function () {
@@ -79,10 +119,6 @@ app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location, 
         {
             $location.path('/chat');
         }
-    };
-
-    $scope.toggleSideBar = function () {
-        $ionicSideMenuDelegate.toggleRight();
     };
 });
 
@@ -109,7 +145,10 @@ app.controller('groupCtrl', function ($scope, $rootScope, $location, $window) {
     {
         $location.path('/addgroup');
     };
-
+$scope.changePath = function ()
+    {
+        $location.path('/chatuser');
+    };
     //expand group function
 
     $scope.expandGroup = function ()
@@ -213,7 +252,7 @@ app.controller('addcontactCtrl', function ($scope, $rootScope, $location, $windo
     //back to group functionality
     $scope.BacktoEditGroup = function ()
     {
-        $location.path('/groupwiseuser');
+        $location.path('/editgroup');
     };
 });
 
