@@ -1,101 +1,44 @@
 <section>
-	<ion-side-menus>
-		<ion-side-menu-content>
-                    <ion-header-bar class="bar bar-header">
-                            <div class="ion-header" style="width: 100%">
-                                <div class="">
-                                    <div class="ion-android-arrow-back" style="font-size: 30px; padding-left: 8px;" ng-click="backFunction()">
-                                    
-                                </div>
-                                
-                                    <button class="button button-icon toggle-class-left" ng-click="createGroup()" style="font-weight: 500">CREATE</button>
-                                </div>
-                                
-                            </div>	 
-			</ion-header-bar>
-			<ion-content>
-                            <div class="padding-left-20px">
-                                <span class=""><img src="images/group.jpg" class="group-image-height"></span>
-                                <span class=""><input type="text" placeholder="Enter group name" class="group-text-area"></span>
-                            </div>
-                            <div class="padding-left-20px add-group-custom-text-class">
-                                Add group photo
-                            </div>
-                            <div class="padding-left-20px margin-top-10">
-                                Add People in group
-                            </div>
-                            <div class="margin-top-10" ng-show="isBlockDisabled">
-				<ion-list class="">
-				  <div class="item item-avatar" ng-click="changePath()">
-					<img src="images/satya.jpg">
-					<h2 class="display-inline margin-top-10 item-center-list">Block-A</h2>
-					<span class="ion-chevron-right float-right"></span>
-					
-				</div>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/sundar.jpg">
-					<h2 class="display-inline margin-top-10 item-center-list">Block-B</h2>
-					<span class="ion-chevron-right float-right"></span>
-					
-				</a>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/turing.jpg">
-					<h2 class="display-inline margin-top-10 item-center-list">Block-C</h2>
-					<span class="ion-chevron-right float-right"></span>
-				</a>
-				
-			</ion-list>
-                        </div>
-                            <div class=" margin-top-10" ng-hide="isBlockDisabled">
-                                <div class="margin-top-10 ion-android-arrow-back padding-left-20px" style="font-size: 35px;cursor: pointer" ng-click="changePath()"></div>
-				<ion-list class="js-dynamitable margin-top-10">
-				  <div class="item item-avatar" ng-click="changePath()">
-					<img src="images/satya.jpg">
-					<h2 class="display-inline item-center-list">Satya</h2>
-					
-				</div>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/sundar.jpg">
-					<h2 class="display-inline item-center-list">Sundar</h2>
-					
-				</a>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/turing.jpg">
-					<h2 class="display-inline item-center-list">Alan Turing</h2>
-					
-				</a>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/rajni.jpg">
-					<h2 class="display-inline item-center-list">Rajni</h2>
-				
-				</a>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/ram.jpeg">
-					<h2 class="display-inline item-center-list">Ramanujan</h2>
-					
-				</a>
-				<a class="item item-avatar" ng-click="changePath()">
-					<img src="images/elon.jpg">
-					<h2 class="display-inline item-center-list">Elon Musk</h2>
-					
-				</a>
-			</ion-list>
-                        </div>
-		  </ion-content>
-		</ion-side-menu-content>
+                      <ion-header-bar class="bar bar-header">
+                <div class="ion-header" style="width: 100%">
 
-		<ion-side-menu side="right">
-			<ion-header-bar>
-				<h1 class="title">Settings</h1>
-				
-			</ion-header-bar>
-			<ion-content scroll="false">
-				<ion-list>
-					<ion-item>View Contact</ion-item>
-					<ion-item>Call</ion-item>
-					<ion-item>Block</ion-item>
-				</ion-list>
-			</ion-content>
-		</ion-side-menu>
-	</ion-side-menus>
+                    <div style="margin-top: 2%;">
+
+                        <button class="button button-icon icon button-back" ng-click="BacktoGroup()"></button>
+
+                        <input type="text" class="search-area-class js-filter  form-control" style="width: 75% !important;" placeholder="Type new group name">
+                        <button class="button button-icon icon button-create create-group-tick" ng-click="createGroup()"></button>
+                    </div>
+
+                </div>
+            </ion-header-bar>
+			<ion-content>
+                            <div class="create-group-div">
+                             <input type="text" class="search-area-class-filter form-control" placeholder="Search...">
+                            </div>
+                            <ion-list class="js-dynamitable">
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/satya.jpg">
+                        <h2 class="display-inline item-center-list">Satya</h2>
+                        <button class="button button-icon button-select-user-activated icon custom-button-group float-right" ng-click="SelectUser()"></button>
+
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/sundar.jpg">
+                        <h2 class="display-inline item-center-list">Sundar</h2>
+                       <button class="custom-button-group button-select-user float-right" ng-click="SelectUser()"></button>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/turing.jpg">
+                        <h2 class="display-inline item-center-list">Alan Turing</h2>
+                       <button class="button button-icon button-select-user-activated icon  custom-button-group float-right"  ng-click="SelectUser()"></button>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/rajni.jpg">
+                        <h2 class="display-inline item-center-list">Rajni</h2>
+                       <button class="button button-icon button-select-user icon custom-button-group float-right" ng-click="SelectUser()"></button>
+                    </a>
+                </ion-list>
+		  </ion-content>
+
 	</section>

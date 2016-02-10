@@ -4,21 +4,21 @@
 }
 
 </style>
-<section style="height: 100%;">
+<section style="height:100%">
 
             <ion-header-bar class="bar bar-header">
                 <div class="ion-header" style="width: 100%">
                     <div class="" ng-hide="isSerachtrue">
                         <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
                         <button class="button button-icon icon  button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
-                        <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="addNewUser()"></button>
-                        <button class="button button-icon icon button-user custom-button-group toggle-class-left" ></button>
+                        <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="goToGroup()"></button>
+                        <button class="button button-icon icon button-user custom-button-group toggle-class-left" ng-click="goToContact()"></button>
                         <button class="button button-icon icon button-search custom-button-group toggle-class-left" ng-click="showsearchBar()"></button>
 
                     </div>
                     <div class="" ng-show="isSerachtrue">
 
-                        <button class="button button-icon icon button-back" ng-click="hideSerarchbar()"></button>
+                        <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="hideSerarchbar()"></button>
 
                         <input type="text" class="search-area-class js-filter  form-control" placeholder="Search...">
                     </div>
@@ -71,7 +71,7 @@
                     <p style="margin-top: 10px;">Advt.</p>
                 </div>
                 </ion-footer-bar>
-        <div class="float-right" id="settings-popup" ng-show="displaySideBar">
+     <div class="float-right" id="settings-popup" ng-show="displaySideBar">
   		<ion-list style="background: #848484; height: 100%;">
   			<ion-item class="grey-background">
   				<img class="settings-images" src="images/Main_Contacts_32.png" alt="contact info" />
@@ -91,4 +91,8 @@
   			</ion-item>
   		</ion-list>
   	</div>
+<<<<<<< HEAD
 </section>
+=======
+</section>
+>>>>>>> 8eb7cc273652a7025ef757631c0011e017c7767a
