@@ -19,7 +19,6 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
         if($scope.displaySideBar){
-          
           $scope.displaySideBar = false;
           $scope.popupClass = 'button-setting';
         }
@@ -34,7 +33,7 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
     {
         $location.path('addgroup');
     };
-    
+
     $scope.isSerachtrue = false;
     $rootScope.isConatct = false;
 //to show search bar
@@ -70,7 +69,7 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
         $location.path('/contact');
     }
 });
-/* 
+/*
  *  Author-Himanshu
  * Date-July24, 2015
  * Purpose- this file is resposible for getting user number and and send them a verification code
@@ -80,11 +79,8 @@ app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $locat
 app.controller('chatuserCtrl', function ($scope, $state, $rootScope, $location,$ionicPopup, $window, $ionicHistory, $ionicModal, $ionicSideMenuDelegate) {
 
 $scope.displaySideBar = false;
-  
-//functionlity on back button
-    $scope.myGoBack = function () {
-        $location.path('/chat');
-    };
+
+
     $scope.popupClass='button-setting';
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
@@ -97,7 +93,15 @@ $scope.displaySideBar = false;
         $scope.popupClass = 'close-button-setting';
         }
     };
-    
+    $scope.showAttachment = function() {
+      if($scope.displayAttachment) {
+        $scope.displayAttachment = false;
+      }
+      else {
+        $scope.displayAttachment = true;
+      }
+    };
+
     //This is the Ionic Popup
     $scope.showSideBar = function(){
         var myPopup = $ionicPopup.show({
@@ -115,6 +119,10 @@ $scope.displaySideBar = false;
         {
             $location.path('/groupwiseuser');
         }
+        else if($rootScope.isConatct == '3')
+        {
+            $location.path('/group');
+        }
         else
         {
             $location.path('/chat');
@@ -122,13 +130,13 @@ $scope.displaySideBar = false;
     };
 });
 
-/* 
+/*
  Author-Himanshu
- Purpose- this conroller is used for terms and conditions 
+ Purpose- this conroller is used for terms and conditions
  */
 
 
-/* 
+/*
  Controller used to book a particular user detail and for booking
  */
 
@@ -136,6 +144,7 @@ $scope.displaySideBar = false;
 app.controller('groupCtrl', function ($scope, $rootScope, $location, $window) {
     //check whether user selected servieces or not
 
+    $rootScope.isConatct ='3'
 
     $scope.BacktoChat = function ()
     {
@@ -157,7 +166,7 @@ $scope.changePath = function ()
     }
 
 });
-/* 
+/*
  *  Author-Himanshu
  * Date-July24, 2015
  * Purpose- this file is resposible for otp messafe forwarding
@@ -178,7 +187,7 @@ app.controller('addgroupCtrl', function ($scope, $rootScope, $location, $window)
     {
         $scope.isBlockDisabled = true;
     }
-    
+
     //function tp create group
     $scope.createGroup = function ()
     {
@@ -245,7 +254,6 @@ app.controller('editgroupCtrl', function ($scope, $rootScope, $location, $window
         $location.path('/chat');
     }
 });
-
 app.controller('addcontactCtrl', function ($scope, $rootScope, $location, $window) {
     //check whether user selected servieces or not
     //fuction for back button to go back to chat screen
@@ -255,6 +263,3 @@ app.controller('addcontactCtrl', function ($scope, $rootScope, $location, $windo
         $location.path('/editgroup');
     };
 });
-
-
-

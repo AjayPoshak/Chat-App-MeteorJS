@@ -67,14 +67,14 @@
 }
 .other-user-chat
 {
-    background: #007AFF !important;
+    background: #DCDCDC !important;
     display: inline-block !important;
-    color: white !important;
+    color: #000 !important;
     padding: 10px !important;
-    border-radius: 10px !important;
     text-align: left !important;
     max-width: 240px !important;
     margin-top: 35px !important;
+    border: 3px solid #848484;
 }
 .text-align
 {
@@ -96,14 +96,12 @@
 }
 .my-chat
 {
-    background: #F15A25 !important;
-    display: inline-block !important;
-    color: white !important;
+    background: #FFDDAB !important;
     padding: 10px !important;
-    border-radius: 10px !important;
     margin-top: 35px !important;
     text-align: left !important;
     max-width: 240px !important;
+    border: 3px solid #F15A25;
 }
 .custom-input-wrapper-text-message
 {
@@ -132,12 +130,12 @@
 .search-area-class-filter
 {
     width: 80% !important;
-    margin-left: 42px;
+    margin-left: 2%;
     background: #fff !important;
     border:  2px solid #F16A24 !important;
     border-radius: 4px;
     color: #000 !important;
-    
+
 }
 .create-group-div
 {
@@ -187,6 +185,7 @@ input[type="text"], input[type="password"] {
   padding-left: 10px;
   width: 100%;
   color: #fff;
+  width: 85% !important;
 }
 .new-group img {
   margin-top: 13%;
@@ -208,6 +207,7 @@ input[type="text"], input[type="password"] {
 
 .bar-header {
   background: #F16A24;
+  height: 55px !important;
 }
 .h1 {
   color: #fff;
@@ -221,6 +221,9 @@ input[type="text"], input[type="password"] {
 .float-right {
 	float: right;
 }
+.float-left {
+  float: left;
+}
 .login-custom-class
 {
     width: 300px !important;
@@ -232,47 +235,54 @@ input[type="text"], input[type="password"] {
     color: white;
     font-size: 20px;
 }
-.button-setting
-{
-    background:url(images/Settings_32.png) no-repeat;
-    
+.close-button-setting {
+  background: url(images/Main_Settings.png) no-repeat;
 }
 .button-search
 {
-     background:url(images/Search_32.png) no-repeat;
-   
+     background:url(images/Search.png) no-repeat;
+
 }
 .button-edit-group
 {
-    background:url(images/Group_Edit_32.png) no-repeat;
+    background:url(images/Group_Edit.png) no-repeat;
 }
 .button-add-user-group
 {
-    background:url(images/Group_Add_64.png) no-repeat;
+    background:url(images/Group_Add.png) no-repeat;
 }
 .edit-group-class
 {
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
     margin-right: 20px;
 }
 .button-user
 {
-     background:url(images/Main_Contacts_32.png) no-repeat;
-    
+     background:url(images/Main_Contacts.png) no-repeat;
+
 }
 .button-group
 {
-     background:url(images/Group_32.png) no-repeat;
-    
+     background:url(images/Groups.png) no-repeat;
+
+}
+.button-show-attachemnt
+{
+  background:url(images/Attach.png) no-repeat !important;
+  height: 24px;
+  background-position: center;
+  width: 26px;
 }
 .button-create-group
 {
-    background:url(images/Group_Create_32.png) no-repeat;
+    background:url(images/Groups_Create.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
     margin-right: 20px;
 }
 .create-group-tick
@@ -283,58 +293,35 @@ input[type="text"], input[type="password"] {
 }
 .button-create
 {
-    background:url(images/Done_32.png) no-repeat;
+    background:url(images/Done.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    background-position: center;
+    height: 24px;
+    width: 24px;
     margin-right: 10px;
+    background-position: center;
+}
+.emoticons-class
+{
+    height: 34px;
+    background: #fff;
+    border: 1px solid #fff;
 }
 .custom-button-group
 {
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    background-position: center !important;
+    height: 24px;
+    width: 24px;
     margin-left: 25px;
+    margin-top: 2.5%;
 }
 .tick-image-class
 {
     height: 12px;
     padding-right: 5px;
-}
-.a-class-border
-{
-    border-bottom: 2px solid #DCDCDC
-}
-.chat-user-image
-{
-    height: 32px;
-    border-radius: 50%;
-    margin-left: 40px;
-}
-
-.button-expand-group
-{
-    background:url(images/Group_Expand_32.png) no-repeat;
-}
-.button-select-user
-{
-    background:url(images/CheckBox_Blank_32.png) no-repeat;
-}
-.button-select-user-activated
-{
-    background:url(images/CheckBox_32.png) no-repeat;
-}
-
-.default-group-class
-{
-    padding-top: 3px;
-    padding-bottom: 5px;
-    background: #DCDCDC;
-    text-align: center;
-    vertical-align: middle;
-    border-top:2px solid #DCDCDC;
 }
 .send-message-text-area
 {
@@ -352,6 +339,48 @@ input[type="text"], input[type="password"] {
     height: 93%;
     border-radius: 50%;
     margin-left: 5%;
+}
+
+.button-expand-group
+{
+    background:url(images/Groups_Expand.png) no-repeat;
+}
+.button-select-user
+{
+    background:url(images/CheckBox_Blank.png) no-repeat;
+}
+.button-select-user-activated
+{
+    background:url(images/CheckBox.png) no-repeat;
+}
+
+.default-group-class
+{
+    padding-bottom: 5px;
+    background: #DCDCDC;
+    text-align: center;
+    vertical-align: middle;
+    border-top:2px solid #DCDCDC;
+}
+.send-message-text-area
+{
+    margin-left: 15px;
+    background: #fff !important;
+    border: 2px solid #848484 !important;
+    color: #000 !important;
+}
+.a-class-border
+{
+    border-bottom: 2px solid #DCDCDC;
+    height: 80px !important;
+}
+.chat-user-image
+{
+    height: 93%;
+    border-radius: 50%;
+    margin-left: 5%;
+    max-height: 40px;
+    max-width: 40px;
 }
 .attachment-popup {
   /*margin-top: 18% !important;*/
@@ -389,13 +418,6 @@ input[type="text"], input[type="password"] {
   position: relative;
   height: 100%;
 }
-.grey-background {
-  background: #848484;
-  border-color: #848484;
-  height: 70%;
-  width: 100%;
-  vertical-align: middle;
-}
 /*
     @Author-Ajay
 */
@@ -406,6 +428,10 @@ input[type="text"], input[type="password"] {
   margin-bottom: 30px;
   float:left;
   margin-left: 33%;
+}
+.h2-font-wieght
+{
+    font-weight: 600 !important;
 }
 .welcome-img img {
   height: 25px;
@@ -531,7 +557,7 @@ input[type="text"], input[type="password"] {
 .chat-user-setting
 {
     margin-top: 0;
-    margin-left: 35% !important;
+    margin-left: 26% !important;
 }
 .button-user-image
 {
@@ -569,13 +595,6 @@ input[type="text"], input[type="password"] {
 *::-moz-placeholder {
  color: #000 !important;
 }
-input[type="text"], input[type="password"] {
-  border-bottom: 1px solid #fff;
-  background: #848484;
-  padding-left: 10px;
-  width: 100%;
-  color: #fff;
-}
 .new-group img {
   margin-top: 13%;
   height: 55px;
@@ -594,9 +613,6 @@ input[type="text"], input[type="password"] {
   margin-left: 2%;
 }
 
-.bar-header {
-  background: #F16A24;
-}
 .h1 {
   color: #fff;
 }
@@ -625,61 +641,46 @@ input[type="text"], input[type="password"] {
 }
 .button-setting
 {
-    background:url(images/Settings_32.png) no-repeat;
-    cursor: pointer;
-    border: none;
-    height: 32px;
-    width: 32px;
+    background:url(images/Main_Settings.png) no-repeat;
+    
 }
 .close-button-setting {
-    background: url(images/Settings_Close_32.png) no-repeat;
+    background: url(images/Settings_Cross.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
 }
 .button-search
 {
-     background:url(images/Search_32.png) no-repeat;
+     background:url(images/Search.png) no-repeat;
 
 }
 .button-user
 {
-     background:url(images/Main_Contacts_32.png) no-repeat;
+     background:url(images/Main_Contacts.png) no-repeat;
 
 }
 .button-group
 {
-     background:url(images/Group_32.png) no-repeat;
+     background:url(images/Groups.png) no-repeat;
 
-}
-.button-show-attachemnt
-{
-  background:url(images/Attach_32.png) no-repeat !important;
-  height: 32px;
-  width: 32px;
 }
 .button-back
 {
-    background:url(images/Back_32.png) no-repeat;
+    background:url(images/Back.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
 }
 .emoticons-class
 {
     height: 34px;
     background: #fff;
     border: 1px solid #fff;
-}
-.custom-button-group
-{
-    cursor: pointer;
-    border: none;
-    height: 32px;
-    width: 32px;
-    margin-left: 25px;
 }
 .tick-image-class
 {
@@ -696,12 +697,6 @@ input[type="text"], input[type="password"] {
 .a-class-border
 {
     border-bottom: 2px solid #DCDCDC
-}
-.chat-user-image
-{
-    height: 93%;
-    border-radius: 50%;
-    margin-left: 5%;
 }
 .chat-user-name
 {

@@ -14,5 +14,5 @@ app.config(function($stateProvider,$urlRouterProvider){
             .state('addcontact',{url:'/addcontact',cache: false,templateUrl:'templates/addcontact.html',controller:'addcontactCtrl'})
             //.state('booking',{url:'/booking',templateUrl:'templates/bookingDetail.html',controller:'bookingDetailCtrl'})
             //.state('thanks',{url:'/thanks',templateUrl:'templates/thanks.html',controller:'thankCtrl'});
-    
+
     $urlRouterProvider.otherwise('/login');});
