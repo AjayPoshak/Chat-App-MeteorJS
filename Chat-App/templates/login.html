@@ -1,17 +1,20 @@
-      <ion-view style="background:#F15A25;">
-        <ion-content>
-            <div class="text-align" style="margin-top: 60px;">
-                <img class="" src="images/satya.jpg">
-                <div class="text-align">
-                    <div class="" style="margin-top: 10px;">
-                        <input type="text" class="login-user-name-color" id="" placeholder="Username" style="font-size: 16px;">
-                    </div>
-                    <div class="" style="margin-top: 20px;">
-                    <input type="password" class="login-user-name-color" id="" placeholder="Password">
-                    </div>
-                    <button type="submit" class="login-custom-class" ng-click="signIn()">Login</button>
-                </div>
-                
-            </div>
-        </ion-content>
-      </ion-view>
+<ion-view style="background:#F15A25;">
+  <ion-content>
+      <div class="text-align" style="margin-top: 60px;">
+          <img class="" src="images/satya.jpg">
+          <div class="text-align">
+              <div style="margin-top: 10px;">
+                  <input ng-model="user.username" type="text" class="login-user-name-color"
+                   placeholder="Username" style="font-size: 16px;">
+              </div>
+              {{username}}
+              <div style="margin-top: 20px;">
+                <input ng-model="user.password" type="password" class="login-user-name-color"
+                  placeholder="Password">
+              </div>
+              {{password}}
+              <button type="submit" class="login-custom-class" ng-click="signIn(user)">Login</button>
+          </div>
+      </div>
+  </ion-content>
+</ion-view>

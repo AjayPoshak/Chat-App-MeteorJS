@@ -3,6 +3,7 @@
  * Date-July24, 2015
  * Purpose- this file is resposible for getting services and choose according to that
  */
+"use strict";
 app.controller('loginCtrl', function ($scope, $window, $rootScope, $location) {
 
     $scope.signIn = function ()
@@ -12,10 +13,21 @@ app.controller('loginCtrl', function ($scope, $window, $rootScope, $location) {
 
 });
 
-app.controller('chatCtrl', function ($scope, $rootScope, $window, $state, $location, $timeout, $ionicModal, $ionicSideMenuDelegate) {
+app.controller('chatCtrl', function ($scope, $rootScope, chatService, $window, $state, $location, $timeout, $ionicModal, $ionicSideMenuDelegate) {
 
     $scope.displaySideBar = false;
-  $scope.popupClass='button-setting';
+    $scope.popupClass='button-setting';
+    chatService.getUserByApartment()
+      .success(function(response){
+        $rootScope.chatContacts = response;
+        window.localStorage["userData"] = angular.toJson(response);
+        console.log(response);
+      })
+      .error(function(err){
+        console.log(err);
+      });
+      var data = localStorage.getItem("userData");
+      console.log("Data::"+data.apartment_name);
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
         if($scope.displaySideBar){
@@ -143,7 +155,7 @@ $scope.displaySideBar = false;
 
 app.controller('groupCtrl', function ($scope, $rootScope, $location, $window) {
     //check whether user selected servieces or not
-
+      console.log($rootScope.chatContacts);
     $rootScope.isConatct ='3'
 
     $scope.BacktoChat = function ()
@@ -200,8 +212,43 @@ app.controller('addgroupCtrl', function ($scope, $rootScope, $location, $window)
 });
 
 app.controller('contactCtrl', function ($scope, $rootScope, $location, $window) {
-    //check whether user selected servieces or not
-    //fuction for back button to go back to chat screen
+    var current = [];
+    if(!$rootScope.chatContacts){
+      current = $rootScope.chatContacts = JSON.parse(localStorage.getItem("userData"));
+      console.log("getting from local...");
+    }
+    else{
+        //console.log($rootScope.chatContacts);
+        current = $rootScope.chatContacts;
+    }
+    console.log(current[0]);
+    var blocks = [];
+    var users = [];
+    $scope.userInfo = [];
+    //console.log(current.length);
+    for(var i in current){
+      blocks[i] = current[i].blocks;
+      //console.log(current.blocks);
+    }
+    //console.log(blocks[0]);
+    for(var j in blocks){
+      for(var k=0; k<blocks[j].length; k++){
+        //console.log(blocks[j][k]);
+        users[k] = blocks[j][k].users;
+      }
+    }
+    var itr = 0;
+    for(var k in users){
+      //console.log("Users Length::"+users[k].length);
+      for(var l=0; l<users[k].length; l++){
+        $scope.userInfo[itr] = users[k][l];
+        itr++;
+      }
+    }
+    /*for(var i in $scope.userInfo){
+      console.log($scope.userInfo[i]);
+    }*/
+    console.log("user info::"+$scope.userInfo[4]);
     $rootScope.isConatct ='1'
     $scope.BacktoChat = function ()
     {

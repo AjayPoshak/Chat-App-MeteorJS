@@ -130,7 +130,7 @@
 .search-area-class-filter
 {
     width: 80% !important;
-    margin-left: 42px;
+    margin-left: 2%;
     background: #fff !important;
     border:  2px solid #F16A24 !important;
     border-radius: 4px;
@@ -235,55 +235,51 @@ input[type="text"], input[type="password"] {
     color: white;
     font-size: 20px;
 }
-.button-setting
-{
-    background:url(images/Settings_32.png) no-repeat;
-}
 .close-button-setting {
-  background: url(images/Settings_Close_32.png) no-repeat;
+  background: url(images/Main_Settings.png) no-repeat;
 }
 .button-search
 {
-     background:url(images/Search_32.png) no-repeat;
-
+     background:url(images/Search.png) no-repeat;
 }
 .button-edit-group
 {
-    background:url(images/Group_Edit_32.png) no-repeat;
+    background:url(images/Group_Edit.png) no-repeat;
 }
 .button-add-user-group
 {
-    background:url(images/Group_Add_64.png) no-repeat;
+    background:url(images/Group_Add.png) no-repeat;
 }
 .edit-group-class
 {
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
     margin-right: 20px;
 }
 .button-user
 {
-     background:url(images/Main_Contacts_32.png) no-repeat;
-
+     background:url(images/Main_Contacts.png) no-repeat;
 }
 .button-group
 {
-     background:url(images/Group_32.png) no-repeat;
-
+     background:url(images/Groups.png) no-repeat;
 }
 .button-show-attachemnt
 {
-  background:url(images/Attach_32.png) no-repeat !important;
-  height: 32px;
-  width: 32px;
+  background:url(images/Attach.png) no-repeat !important;
+  height: 24px;
+  background-position: center;
+  width: 26px;
 }
 .button-create-group
 {
-    background:url(images/Group_Create_32.png) no-repeat;
+    background:url(images/Groups_Create.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
     margin-right: 20px;
 }
 .create-group-tick
@@ -294,12 +290,20 @@ input[type="text"], input[type="password"] {
 }
 .button-create
 {
-    background:url(images/Done_32.png) no-repeat;
+    background:url(images/Done.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    background-position: center;
+    height: 24px;
+    width: 24px;
     margin-right: 10px;
+    background-position: center;
+}
+.emoticons-class
+{
+    height: 34px;
+    background: #fff;
+    border: 1px solid #fff;
 }
 .emoticons-class
 {
@@ -311,10 +315,11 @@ input[type="text"], input[type="password"] {
 {
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    background-position: center !important;
+    height: 24px;
+    width: 24px;
     margin-left: 25px;
-    margin-top: 2%;
+    margin-top: 2.5%;
 }
 .tick-image-class
 {
@@ -341,20 +346,19 @@ input[type="text"], input[type="password"] {
 
 .button-expand-group
 {
-    background:url(images/Group_Expand_32.png) no-repeat;
+    background:url(images/Groups_Expand.png) no-repeat;
 }
 .button-select-user
 {
-    background:url(images/CheckBox_Blank_32.png) no-repeat;
+    background:url(images/CheckBox_Blank.png) no-repeat;
 }
 .button-select-user-activated
 {
-    background:url(images/CheckBox_32.png) no-repeat;
+    background:url(images/CheckBox.png) no-repeat;
 }
 
 .default-group-class
 {
-    padding-top: 10px;
     padding-bottom: 5px;
     background: #DCDCDC;
     text-align: center;
@@ -370,13 +374,16 @@ input[type="text"], input[type="password"] {
 }
 .a-class-border
 {
-    border-bottom: 2px solid #DCDCDC
+    border-bottom: 2px solid #DCDCDC;
+    height: 80px !important;
 }
 .chat-user-image
 {
     height: 93%;
     border-radius: 50%;
     margin-left: 5%;
+    max-height: 40px;
+    max-width: 40px;
 }
 .attachment-popup {
   /*margin-top: 18% !important;*/
@@ -414,13 +421,6 @@ input[type="text"], input[type="password"] {
   position: relative;
   height: 100%;
 }
-.grey-background {
-  background: #848484;
-  border-color: #848484;
-  height: 70%;
-  width: 100%;
-  vertical-align: middle;
-}
 /*
     @Author-Ajay
 */
@@ -431,6 +431,10 @@ input[type="text"], input[type="password"] {
   margin-bottom: 30px;
   float:left;
   margin-left: 33%;
+}
+.h2-font-wieght
+{
+    font-weight: 600 !important;
 }
 .welcome-img img {
   height: 25px;
@@ -640,47 +644,40 @@ input[type="text"], input[type="password"] {
 }
 .button-setting
 {
-    background:url(images/Settings_32.png) no-repeat;
-    cursor: pointer;
-    border: none;
-    height: 32px;
-    width: 32px;
+    background:url(images/Main_Settings.png) no-repeat;
+    
 }
 .close-button-setting {
-    background: url(images/Settings_Close_32.png) no-repeat;
+    background: url(images/Settings_Cross.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
 }
 .button-search
 {
-     background:url(images/Search_32.png) no-repeat;
+     background:url(images/Search.png) no-repeat;
 
 }
 .button-user
 {
-     background:url(images/Main_Contacts_32.png) no-repeat;
+     background:url(images/Main_Contacts.png) no-repeat;
 
 }
 .button-group
 {
-     background:url(images/Group_32.png) no-repeat;
+     background:url(images/Groups.png) no-repeat;
 
-}
-.button-show-attachemnt
-{
-  background:url(images/Attach_32.png) no-repeat !important;
-  height: 32px;
-  width: 32px;
 }
 .button-back
 {
-    background:url(images/Back_32.png) no-repeat;
+    background:url(images/Back.png) no-repeat;
     cursor: pointer;
     border: none;
-    height: 32px;
-    width: 32px;
+    height: 24px;
+    width: 24px;
+    background-position: center;
 }
 .emoticons-class
 {
@@ -703,12 +700,6 @@ input[type="text"], input[type="password"] {
 .a-class-border
 {
     border-bottom: 2px solid #DCDCDC
-}
-.chat-user-image
-{
-    height: 93%;
-    border-radius: 50%;
-    margin-left: 5%;
 }
 .chat-user-name
 {

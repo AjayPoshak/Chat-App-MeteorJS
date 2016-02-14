@@ -14,36 +14,30 @@
             </ion-header-bar>
             <ion-content>
                 <ion-list class="js-dynamitable">
-                    <a class="item item-avatar a-class-border" ng-click="changePath()">
-                        <img src="images/satya.jpg">
-                        <h2 class="display-inline item-center-list">Satya</h2>
-
+                    <a class="item item-avatar a-class-border" ng-repeat="user in userInfo" ng-click="changePath()">
+                        <img ng-src="{{user.profile_image}}">
+                        <h2 class="display-inline item-center-list h2-font-wieght">{{user.user_name}}</h2>
                     </a>
-                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                    <!--a class="item item-avatar a-class-border" ng-click="changePath()">
                         <img src="images/sundar.jpg">
-                        <h2 class="display-inline item-center-list">Sundar</h2>
-
+                        <h2 class="display-inline item-center-list h2-font-wieght">Sundar</h2>
                     </a>
                     <a class="item item-avatar a-class-border" ng-click="changePath()">
                         <img src="images/turing.jpg">
-                        <h2 class="display-inline item-center-list">Alan Turing</h2>
-
+                        <h2 class="display-inline item-center-list h2-font-wieght">Alan Turing</h2>
                     </a>
                     <a class="item item-avatar a-class-border" ng-click="changePath()">
                         <img src="images/rajni.jpg">
-                        <h2 class="display-inline item-center-list">Rajni</h2>
-
+                        <h2 class="display-inline item-center-list h2-font-wieght">Rajni</h2>
                     </a>
                     <a class="item item-avatar a-class-border" ng-click="changePath()">
                         <img src="images/ram.jpeg">
-                        <h2 class="display-inline item-center-list">Ramanujan</h2>
-
+                        <h2 class="display-inline item-center-list h2-font-wieght">Ramanujan</h2>
                     </a>
                     <a class="item item-avatar a-class-border" ng-click="changePath()">
                         <img src="images/elon.jpg">
-                        <h2 class="display-inline item-center-list">Elon Musk</h2>
-
-                    </a>
+                        <h2 class="display-inline item-center-list h2-font-wieght">Elon Musk</h2>
+                    </a-->
                 </ion-list>
 
             </ion-content>

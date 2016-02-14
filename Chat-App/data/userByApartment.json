@@ -1,0 +1,101 @@
+[
+   {
+      "apartment_id":1,
+      "apartment_name":"Vasant Kunj",
+      "blocks":[
+         {
+            "block_id":1,
+            "block_name":"block-A",
+            "type":"default",
+            "users":[
+               {
+                  "user_id":201,
+                  "user_name":"Sundar",
+                  "profile_image":"http://www.thehindu.com/multimedia/dynamic/02506/THAVD_SUNDAR_PICHA_2506014f.jpg",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":202,
+                  "user_name":"Satya",
+                  "profile_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTjyWu_Bmzh7N_vBNqAcJmZOJmn6Hzln3AlxkcM_pLKJId7SyV5Q",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":203,
+                  "user_name":"Alan Turing",
+                  "profile_image":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":204,
+                  "user_name":"Ramanujan",
+                  "profile_image":"http://www.indianetzone.com/photos_gallery/18/s_ramanujan_18314.jpg",
+                  "imei":123456789012345
+               }
+            ]
+         },
+         {
+            "block_id":2,
+            "block_name":"block-b",
+            "type":"default",
+            "users":[
+               {
+                  "user_id":201,
+                  "user_name":"Sundar t",
+                  "profile_image":"http://www.thehindu.com/multimedia/dynamic/02506/THAVD_SUNDAR_PICHA_2506014f.jpg",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":202,
+                  "user_name":"Satya t",
+                  "profile_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTjyWu_Bmzh7N_vBNqAcJmZOJmn6Hzln3AlxkcM_pLKJId7SyV5Q",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":203,
+                  "user_name":"Alan Turing t",
+                  "profile_image":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":204,
+                  "user_name":"Ramanujan t",
+                  "profile_image":"http://www.indianetzone.com/photos_gallery/18/s_ramanujan_18314.jpg",
+                  "imei":123456789012345
+               }
+            ]
+         },
+         {
+            "block_id":3,
+            "block_name":"rahul",
+            "type":"personal",
+            "users":[
+               {
+                  "user_id":301,
+                  "user_name":"Sundar Second",
+                  "profile_image":"http://www.thehindu.com/multimedia/dynamic/02506/THAVD_SUNDAR_PICHA_2506014f.jpg",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":302,
+                  "user_name":"Satya Second",
+                  "profile_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTjyWu_Bmzh7N_vBNqAcJmZOJmn6Hzln3AlxkcM_pLKJId7SyV5Q",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":303,
+                  "user_name":"Alan Turing Second",
+                  "profile_image":"https://upload.wikimedia.org/wikipedia/commons/a/a1/Alan_Turing_Aged_16.jpg",
+                  "imei":123456789012345
+               },
+               {
+                  "user_id":304,
+                  "user_name":"Ramanujan Second",
+                  "profile_image":"http://www.indianetzone.com/photos_gallery/18/s_ramanujan_18314.jpg",
+                  "imei":123456789012345
+               }
+            ]
+         }
+      ]
+   }
+]

@@ -1,4 +1,4 @@
-var app=angular.module('chatApp',['ionic','ui.router'])
+var app=angular.module('chatApp',['ionic','ui.router','ngResource'])
 
 
 app.config(function($stateProvider,$urlRouterProvider){
