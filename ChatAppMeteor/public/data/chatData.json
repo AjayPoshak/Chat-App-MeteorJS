@@ -1,0 +1,51 @@
+[
+   {
+      "from":207,
+      "to":301,
+      "message":"Hi How are you",
+      "Date":"17-02-16",
+      "Time":"11:20 AM"
+   },
+   {
+      "from":301,
+      "to":207,
+      "message":"Fine",
+      "Date":"17-02-16",
+      "Time":"11:21 AM"
+   },
+   {
+      "from":301,
+      "to":207,
+      "message":"What about you?",
+      "Date":"17-02-16",
+      "Time":"11:22 AM"
+   },
+   {
+      "from":207,
+      "to":301,
+      "message":"I am also fine.",
+      "Date":"17-02-16",
+      "Time":"11:22 AM"
+   },
+   {
+      "from":301,
+      "to":207,
+      "message":"Then keep going, buddy",
+      "Date":"17-02-16",
+      "Time":"11:22 AM"
+   },
+   {
+      "from":207,
+      "to":202,
+      "message":"Good Morning",
+      "Date":"17-02-16",
+      "Time":"11:20 AM"
+   },
+   {
+      "from":202,
+      "to":207,
+      "message":"Hi How are you",
+      "Date":"17-02-16",
+      "Time":"11:20 AM"
+   }
+]

@@ -1,0 +1,94 @@
+<style>
+.list {
+  height: 31.5%;
+}
+
+</style>
+<section style="height:100%">
+
+            <ion-header-bar class="bar bar-header">
+                <div class="ion-header" style="width: 100%">
+                    <div class="" ng-hide="isSerachtrue">
+                        <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
+                        <button class="button button-icon icon  button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
+                        <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="goToGroup()"></button>
+                        <button class="button button-icon icon button-user custom-button-group toggle-class-left" ng-click="goToContact()"></button>
+                        <button class="button button-icon icon button-search custom-button-group toggle-class-left" ng-click="showsearchBar()"></button>
+
+                    </div>
+                    <div class="" ng-show="isSerachtrue">
+
+                        <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="hideSerarchbar()"></button>
+
+                        <input type="text" class="search-area-class js-filter  form-control" placeholder="Search...">
+                    </div>
+
+                </div>
+            </ion-header-bar>
+            <ion-content>
+                <ion-list class="js-dynamitable">
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/satya.jpg">
+                        <h2 class="display-inline h2-font-wieght">Satya</h2>
+                        <span class="time-stamp float-right">11:45 PM</span>
+                        <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>Have you tried Kotana ?</p>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/sundar.jpg">
+                        <h2 class="display-inline h2-font-wieght">Sundar</h2>
+                        <span class="time-stamp float-right">01:45 AM</span>
+                        <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>Oh Kotana is crap, use google voice :D</p>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/turing.jpg"> 
+                        <h2 class="display-inline h2-font-wieght">Alan Turing</h2>
+                        <span class="time-stamp float-right">09:32 AM</span>
+                        <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>VOILA!!! I broke the Enigma.</p>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/rajni.jpg">
+                        <h2 class="display-inline h2-font-wieght">Rajni</h2>
+                        <span class="time-stamp float-right">01:45 PM</span>
+                        <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>Mind It!! Rascals</p>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/ram.jpeg">
+                        <h2 class="display-inline h2-font-wieght">Ramanujan</h2>
+                        <span class="time-stamp float-right">09:45 PM</span>
+                        <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>That equation seems fine.</p>
+                    </a>
+                    <a class="item item-avatar a-class-border" ng-click="changePath()">
+                        <img src="images/elon.jpg">
+                        <h2 class="display-inline h2-font-wieght">Elon Musk</h2>
+                        <span class="time-stamp float-right">12:45 PM</span>
+                        <p style="padding-top: 5px;"><span class=""><img src="images/Blue-tick2.png" class="tick-image-class"></span>Have you tried my new EP2... ;)</p>
+                    </a>
+                </ion-list>
+
+            </ion-content>
+            <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer" style="background:#848484;">
+                <div class="" style="text-align: center;width: 100%;">
+                    <p style="margin-top: 10px;">Advt.</p>
+                </div>
+                </ion-footer-bar>
+    <div class="float-right" id="settings-popup" ng-show="displaySideBar">
+  		<ion-list style="background: #848484; height: 100%;">
+  			<ion-item class="grey-background">
+                            <img class="settings-images" src="images/Main_Contacts.png" style="margin-top:40px !important;" alt="contact info" />
+  				<span class="settings-text">Contact Info</span>
+  			</ion-item>
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Settings_Call.png" style="margin-top:20px !important;" alt="call" />
+  				<span class="settings-text">Call</span>
+  			</ion-item>
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Settings_Block.png" style="margin-top:0px !important;" alt="block" />
+  				<span class="settings-text">Block</span>
+  			</ion-item>
+  			<ion-item class="grey-background">
+  				<img class="settings-images" src="images/Settings_Tools.png" style="margin-top:0px !important;" alt="settings" />
+  				<span class="settings-text">Settings</span>
+  			</ion-item>
+  		</ion-list>
+  	</div>
+</section>
