@@ -2,7 +2,8 @@
 angular.module("chatApp")
   .controller('chatuserCtrl', chatuserCtrl);
 
-  function chatuserCtrl($scope, $state, $rootScope, chatService, $location,$ionicPopup, $window, $ionicHistory, $ionicModal, $stateParams) {
+  function chatuserCtrl($scope, $state, $rootScope, chatService, $location, $window, $stateParams) {
+    $scope.enterMessage = null; //Message entered by user.
     $scope.paramDetails=JSON.parse($stateParams.userDetailParam);
     console.log($scope.paramDetails);
     console.log($scope.paramDetails.user_name);
@@ -56,17 +57,50 @@ angular.module("chatApp")
             $location.path('/chat');
         }
     };
-    chatService.getChatMessages()
+    /*
+    **@function sendMessage: This will be called to insert the message into db.
+    */
+    $scope.sendMessage = function(){
+      console.log("Message Entered::"+$scope.enterMessage);
+      /*Chats._collection.insert({
+        from: $rootScope.userInfo.user_id,
+        to: $scope.paramDetails.user_id,
+        message: $scope.enterMessage
+      });*/
+      /*Meteor.call('newMessage', {
+        text: $scope.enterMessage,
+        type: "text",
+        to: $scope.paramDetails.user_id,
+        from: $rootScope.userInfo.user_id
+      });*/
+      Chats.insert({
+        to: $scope.paramDetails.user_id,
+        from: $rootScope.userInfo.user_id,
+        message: $scope.enterMessage
+      });
+      $scope.enterMessage = "";
+    }
+     //Meteor.subscribe("chats");
+     $scope.subscribe('chats');
+     $scope.helpers({
+         chatMessages: () => {
+           return Chats.find({});
+         }
+       });
+
+
+    /*chatService.getChatMessages()
       .success(function(response){
         console.log(response);
         $scope.chatMessages = response;
       })
       .error(function(err){
         console.error(err);
-      });
+      });*/
       if(!$rootScope.userInfo){
         $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
         console.log("getting from local...");
+        console.log("userInfo"+$rootScope.userInfo);
       }
-      console.log("userInfo"+$rootScope.userInfo[0].user_id);
+      console.log("userInfo"+$rootScope.userInfo.user_id);
 };

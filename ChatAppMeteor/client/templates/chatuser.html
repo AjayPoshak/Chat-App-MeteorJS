@@ -72,7 +72,7 @@
     	<ion-header-bar class="bar bar-header">
 	      <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="myGoBack()"></button>
 	      <img ng-src="{{paramDetails.profile_image}}" class="chat-user-image" style="margin-top: 1%;">
-	      <span class="chat-user-name" style="margin-top: 3% !important;">{{paramDetails.user_name}}</span>
+	      <span class="chat-user-name" style="margin-top: 3% !important;">{{paramDetails.username}}</span>
 <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-left:40%;width: 100%" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
 				<button style="margin-top: 2%;margin-right: 20px;" class="button button-icon icon custom-button-group button-setting toggle-class-left chat-user-setting" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
       </ion-header-bar>
@@ -80,10 +80,10 @@
       	<div style="text-align: center; font-weight: 600; margin-top: 3%;">Yesterday</div>
 				<div class="chat" ng-repeat="msg in chatMessages">
 					<div style="width: 100%;">
-          	<div class="bubble me" ng-if="msg.from==userInfo[0].user_id && msg.to==paramDetails.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">9:40PM</div></div>
+          	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==paramDetails.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">9:40PM</div></div>
 					</div>
 					<div style="width: 100%;">
-						<div class="bubble you" ng-if="msg.from==paramDetails.user_id && msg.to==userInfo[0].user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">9:40PM</div></div>
+						<div class="bubble you" ng-if="msg.from==paramDetails.user_id && msg.to==userInfo.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">9:40PM</div></div>
 					</div>
 						<!--div style="width: 100%;">
 								<div class="bubble me">
@@ -100,9 +100,9 @@
       <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
 				<button class="button button-icon icon button-show-attachemnt"
 				ng-click="showAttachment()" style="margin-left: -1%;"></button>
-				<input type="text" class="send-message-text-area" placeholder="Type message">
+				<input type="text" class="send-message-text-area" placeholder="Type message" ng-model="enterMessage">
 				<button type="submit" class="emoticons-class"><img src="images/emoticon85.png" alt="Arrow Icon"></button>
-      <button class="button button-clear" style="margin-left:0; width: 20%; margin-right: -3%;margin-top: 7px;" ng-click="sendMessage()">
+        <button class="button button-clear" style="margin-left:0; width: 20%; margin-right: -3%;margin-top: 7px;" ng-click="sendMessage()">
 				<img src="images/Send.png" alt="send" />
 			</button>
     </ion-footer-bar>

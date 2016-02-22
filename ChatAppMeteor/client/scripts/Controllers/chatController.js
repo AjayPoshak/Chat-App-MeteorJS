@@ -5,7 +5,10 @@ angular.module("chatApp")
   function chatCtrl($scope, $rootScope, chatService, $window, $http, $state, $location, $timeout, $ionicModal, $ionicSideMenuDelegate) {
     $scope.displaySideBar = false;
     $scope.popupClass='button-setting';
-    chatService.getUserByApartment()
+    var current = {};
+    current = JSON.parse(localStorage.getItem("userDetails"));
+    console.log("apartment_id::"+current.apartment_id);
+    chatService.getUserByApartment(current.apartment_id)
       .then(function(response){
         $rootScope.chatContacts = response;
         window.localStorage["userData"] = angular.toJson(response);
@@ -70,7 +73,6 @@ angular.module("chatApp")
 
     };
     //function to go to contact page
-
     $scope.goToContact = function ()
     {
         $location.path('/contact');
