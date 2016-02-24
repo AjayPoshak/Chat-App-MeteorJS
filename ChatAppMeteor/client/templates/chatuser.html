@@ -1,9 +1,7 @@
 <style>
-
 	.list {
 		height: 31.5%;
 	}
-
 	::-webkit-input-placeholder {
     color:    #000;
 }
@@ -80,10 +78,10 @@
       	<div style="text-align: center; font-weight: 600; margin-top: 3%;">Yesterday</div>
 				<div class="chat" ng-repeat="msg in chatMessages">
 					<div style="width: 100%;">
-          	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==paramDetails.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">9:40PM</div></div>
+          	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==paramDetails.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">{{msg.createdAt| amCalendar }}</div></div>
 					</div>
 					<div style="width: 100%;">
-						<div class="bubble you" ng-if="msg.from==paramDetails.user_id && msg.to==userInfo.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">9:40PM</div></div>
+						<div class="bubble you" ng-if="msg.from==paramDetails.user_id && msg.to==userInfo.user_id">{{msg.message}}<div style="float: right;font-size: 11px;margin-left: 20px;">{{msg.createdAt| amCalendar }}</div></div>
 					</div>
 						<!--div style="width: 100%;">
 								<div class="bubble me">
