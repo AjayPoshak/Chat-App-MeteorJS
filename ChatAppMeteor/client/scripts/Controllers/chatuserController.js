@@ -6,7 +6,7 @@ angular.module("chatApp")
     $scope.enterMessage = null; //Message entered by user.
     $scope.paramDetails=JSON.parse($stateParams.userDetailParam);
     console.log($scope.paramDetails);
-    console.log($scope.paramDetails.user_name);
+    console.log($scope.paramDetails.username);
 
     $scope.displaySideBar = false;
     $scope.popupClass='button-setting';
@@ -62,41 +62,24 @@ angular.module("chatApp")
     */
     $scope.sendMessage = function(){
       console.log("Message Entered::"+$scope.enterMessage);
-      /*Chats._collection.insert({
-        from: $rootScope.userInfo.user_id,
-        to: $scope.paramDetails.user_id,
-        message: $scope.enterMessage
-      });*/
-      /*Meteor.call('newMessage', {
-        text: $scope.enterMessage,
-        type: "text",
-        to: $scope.paramDetails.user_id,
-        from: $rootScope.userInfo.user_id
-      });*/
+      /*This function inserts the messages to db.*/
       Chats.insert({
         to: $scope.paramDetails.user_id,
         from: $rootScope.userInfo.user_id,
-        message: $scope.enterMessage
+        message: $scope.enterMessage,
+        createdAt: new Date()
+
       });
       $scope.enterMessage = "";
     }
-     //Meteor.subscribe("chats");
+    /*Subscribing the chats collection.*/
      $scope.subscribe('chats');
+     /*Retrieving the data from subscribed collection using helpers of Meteor.*/
      $scope.helpers({
          chatMessages: () => {
            return Chats.find({});
          }
        });
-
-
-    /*chatService.getChatMessages()
-      .success(function(response){
-        console.log(response);
-        $scope.chatMessages = response;
-      })
-      .error(function(err){
-        console.error(err);
-      });*/
       if(!$rootScope.userInfo){
         $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
         console.log("getting from local...");
