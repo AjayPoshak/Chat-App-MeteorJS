@@ -1,4 +1,4 @@
-angular.module('chatApp',['angular-meteor','ionic','ngResource']);
+angular.module('chatApp',['angular-meteor','ionic','ngResource','angularMoment']);
 angular.module("chatApp")
 .config(function($stateProvider,$urlRouterProvider){
     $stateProvider
