@@ -4,12 +4,32 @@ angular.module("chatApp")
 
   function chatuserCtrl($scope, $state, $rootScope, chatService, $location, $window, $stateParams) {
     $scope.enterMessage = null; //Message entered by user.
-    $scope.paramDetails=JSON.parse($stateParams.userDetailParam);
-    console.log($scope.paramDetails);
-    console.log($scope.paramDetails.username);
-
+    $scope.individualChatFlag = false; //Flag for individual chat.
+    $scope.paramDetails = null;
+    $scope.groupDetails = null;
     $scope.displaySideBar = false;
     $scope.popupClass='button-setting';
+
+    $scope.paramDetails=JSON.parse($stateParams.userDetailParam);
+    $scope.groupDetails = JSON.parse($stateParams.groupDetailParam);
+
+    console.log($scope.groupDetails);
+    console.log($scope.paramDetails);
+    //console.log($scope.paramDetails.username);
+    if($scope.paramDetails){
+      $scope.individualChatFlag = true; //Flag set for individual chat
+    }
+    if($scope.groupDetails){
+      $scope.individualChatFlag = false; //Flag unset for individual chat, group chat enabled.
+    }
+    console.log("individualChatFlag::"+$scope.individualChatFlag);
+    /*Retrieving the information of user who has logged in.*/
+    if(!$rootScope.userInfo){
+      $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
+      console.log("getting from local...");
+      console.log("userInfo"+$rootScope.userInfo);
+    }
+    console.log("userInfo"+$rootScope.userInfo.user_id);
 
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
@@ -62,14 +82,26 @@ angular.module("chatApp")
     */
     $scope.sendMessage = function(){
       console.log("Message Entered::"+$scope.enterMessage);
-      /*This function inserts the messages to db.*/
-      Chats.insert({
-        to: $scope.paramDetails.user_id,
-        from: $rootScope.userInfo.user_id,
-        message: $scope.enterMessage,
-        createdAt: new Date()
-
-      });
+      /*This function inserts the individual chat messages to db.*/
+      if($scope.paramDetails){
+        Chats.insert({
+          to: $scope.paramDetails.user_id,
+          from: $rootScope.userInfo.user_id,
+          message: $scope.enterMessage,
+          createdAt: new Date()
+        });
+      }
+      /*This would insert messages of group to db.*/
+      if($scope.groupDetails){
+        Chats.insert({
+          to: $scope.groupDetails.block_id,
+          from: $rootScope.userInfo.user_id,
+          fromName: $rootScope.userInfo.username,
+          message: $scope.enterMessage,
+          createdAt: new Date()
+        });
+        console.log("Group Message inserted");
+      }
       $scope.enterMessage = "";
     }
     /*Subscribing the chats collection.*/
@@ -80,10 +112,4 @@ angular.module("chatApp")
            return Chats.find({});
          }
        });
-      if(!$rootScope.userInfo){
-        $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
-        console.log("getting from local...");
-        console.log("userInfo"+$rootScope.userInfo);
-      }
-      console.log("userInfo"+$rootScope.userInfo.user_id);
 };
