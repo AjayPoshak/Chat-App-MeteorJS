@@ -14,18 +14,7 @@ angular.module("chatApp")
         window.localStorage["userData"] = angular.toJson(response);
         console.log(response);
       });
-      /*$http({
-        method: 'GET',
-        url: 'data/userByApartment.json',
-      })
-      .then(function successCallback(response) {
-        $rootScope.chatContacts = response;
-        window.localStorage["userData"] = angular.toJson(response);
-        console.log(response);
-      },
-      function errorCallback(response) {
-        console.error(response);
-      });*/
+
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
         if($scope.displaySideBar){
