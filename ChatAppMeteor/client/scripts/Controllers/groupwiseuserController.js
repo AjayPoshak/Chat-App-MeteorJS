@@ -1,7 +1,10 @@
 "use strict";
 angular.module("chatApp")
   .controller('groupwiseuserCtrl', groupwiseuserCtrl);
-function groupwiseuserCtrl($scope, $rootScope, $location, $window) {
+function groupwiseuserCtrl($scope, $rootScope, $location, $state, $stateParams) {
+  $scope.blockData = JSON.parse($stateParams.blockDataParam);
+  //console.log($scope.blockData);
+
   $rootScope.isConatct='2';
   $scope.BacktoGroup = function ()
   {
@@ -11,8 +14,13 @@ function groupwiseuserCtrl($scope, $rootScope, $location, $window) {
   {
       $location.path('/editgroup')
   }
-  $scope.changePath = function()
+  /*
+  * Redirects to individual chat for that user.
+  *@param user {json} - Data related to user.
+  */
+  $scope.changePath = function(user)
   {
-      $location.path('/chatuser');
+    var userJson = JSON.stringify(user);
+    $state.go('chatuser', {userDetailParam: userJson});
   }
 };
