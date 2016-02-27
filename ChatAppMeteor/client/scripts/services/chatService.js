@@ -16,7 +16,6 @@ angular.module("chatApp")
         method: 'POST',
         url: 'http://service.citze.in/api/UserDetails',
         data: JSON.stringify(apartmentId),
-        //headers: {'Content-Type': 'application/json'}
         headers: {'Content-Type': 'application/json; charset=UTF-8'}
       });
       //return $http.get("data/userByApartment.json");
@@ -28,7 +27,6 @@ angular.module("chatApp")
         method: 'POST',
         url: 'http://service.citze.in/api/userAuth',
         data: JSON.stringify(user),
-        //headers: {'Content-Type': 'application/json'}
         headers: {'Content-Type': 'application/json; charset=UTF-8'}
       });
       //return $http.get("data/userInfo.json");
