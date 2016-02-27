@@ -645,7 +645,7 @@ input[type="text"], input[type="password"] {
 .button-setting
 {
     background:url(images/Main_Settings.png) no-repeat;
-    
+
 }
 .close-button-setting {
     background: url(images/Settings_Cross.png) no-repeat;
@@ -752,4 +752,22 @@ input[type="text"], input[type="password"] {
   height: 70%;
   width: 100%;
   vertical-align: middle;
+}
+.fromName {
+  float: right;
+  font-size: 11px;
+  display: inline-block;
+  width: 100%;
+  padding-left: 60%;
+}
+.time-stamp {
+  float: right;
+  font-size: 11px;
+  margin-left: 20px;
+}
+.time-stamp-day {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 3%;
 }
