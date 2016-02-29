@@ -2,7 +2,7 @@
 angular.module("chatApp")
   .controller('chatuserCtrl', chatuserCtrl);
 
-  function chatuserCtrl($scope, $state, $rootScope, chatService, $location, $window, $stateParams) {
+  function chatuserCtrl($scope, $state, Upload, $rootScope, chatService, $location, $window, $stateParams) {
     $scope.enterMessage = null; //Message entered by user.
     $scope.individualChatFlag = false; //Flag for individual chat.
     $scope.paramDetails = null;
@@ -57,6 +57,29 @@ angular.module("chatApp")
           template: ''
         });
     };
+    /*
+    * Upload images to db.
+    */
+    /*$scope.uploadImage = function(){
+      console.log("file upload"+$scope.file);
+      console.log("uploading image...");
+        Chats.insert({
+          to: $scope.paramDetails.user_id,
+          from: $rootScope.userInfo.user_id,
+          message: $scope.file,
+          createdAt: new Date()
+        });
+    };*/
+    $scope.picFile = null;
+    $scope.addImages = function(files){
+      console.log(files[0]);
+      var fsFile = new FS.File(files[0]);
+      Images.insert(files[0], function(err, fileObj){
+        console.log(fileObj);
+      });
+      //fsCollection.insert($scope.picFile);
+    };
+
 //functionlity on back button
 
     $scope.myGoBack = function () {
@@ -78,7 +101,7 @@ angular.module("chatApp")
         }
     };
     /*
-    **@function sendMessage: This will be called to insert the message into db.
+    **This will be called to insert the message into db.
     */
     $scope.sendMessage = function(){
       console.log("Message Entered::"+$scope.enterMessage);
@@ -103,13 +126,18 @@ angular.module("chatApp")
         console.log("Group Message inserted");
       }
       $scope.enterMessage = "";
-    }
+    };
+
     /*Subscribing the chats collection.*/
      $scope.subscribe('chats');
+     $scope.subscribe('images');
      /*Retrieving the data from subscribed collection using helpers of Meteor.*/
      $scope.helpers({
          chatMessages: () => {
            return Chats.find({});
+         },
+         imageMessages: () => {
+           return Images.find({});
          }
        });
 };

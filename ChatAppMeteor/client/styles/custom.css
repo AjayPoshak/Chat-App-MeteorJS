@@ -265,12 +265,16 @@ input[type="text"], input[type="password"] {
 {
      background:url(images/Groups.png) no-repeat;
 }
-.button-show-attachemnt
+.button-show-attachment
 {
   background:url(images/Attach.png) no-repeat !important;
   height: 24px;
   background-position: center;
   width: 26px;
+}
+.button-show-attachment input[type="file"]{
+  filter: alpha(opacity:0);
+  opacity: 0;
 }
 .button-create-group
 {
