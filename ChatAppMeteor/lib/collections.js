@@ -1,13 +1,3 @@
-/*Images = new FS.Collection("images", {
-  stores: [
-    new FS.Store.GridFS("original")
-  ],
-  filter: {
-    allow: {
-      contentTypes: ['image/*']
-    }
-  }
-});*/
 Images = new FS.Collection("images", {
   stores: [new FS.Store.GridFS("images", {path: "~/uploads"})]
 });
@@ -26,6 +16,9 @@ Images.allow({
     return true;
   },
   download: function(){
+    return true;
+  },
+  update: function(){
     return true;
   }
 });
