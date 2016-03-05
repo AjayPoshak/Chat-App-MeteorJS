@@ -1,7 +1,23 @@
-Meteor.publish("chats", function(){
+/*Meteor.publish("chats", function(){
   return  Chats.find();
 });
 
 Meteor.publish("images", function(){
   return Images.find();
-})
+});
+*/
+Meteor.publishComposite("instantMessages", {
+  find: function(){
+    return Chats.find();
+  },
+  children: [
+    {
+      find: function(chats){
+        return Images.find({_id: chats.imageId},
+        {
+          sort: {uploadedAt: -1}
+        });
+      }
+    }
+  ]
+});
