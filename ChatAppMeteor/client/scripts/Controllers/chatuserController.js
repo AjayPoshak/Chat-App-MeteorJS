@@ -70,11 +70,17 @@ angular.module("chatApp")
           createdAt: new Date()
         });
     };*/
-    $scope.picFile = null;
     $scope.addImages = function(files){
       console.log(files[0]);
       var fsFile = new FS.File(files[0]);
-      Images.insert(files[0], function(err, fileObj){
+      fsFile.to = "2";
+      fsFile.from = "5";
+      //Meteor.call("insertImage", fsFile);
+      /*Images.insert(files[0], function(err, fileObj){
+        console.log(fileObj);
+        console.log("Object ID::"+fileObj._id);
+      });*/
+      Images.insert(fsFile, function (err, fileObj){
         console.log(fileObj);
       });
       //fsCollection.insert($scope.picFile);
@@ -103,34 +109,43 @@ angular.module("chatApp")
     /*
     **This will be called to insert the message into db.
     */
-    $scope.sendMessage = function(){
+    $scope.sendMessage = function(files){
       console.log("Message Entered::"+$scope.enterMessage);
+      console.log(files);
+      var imageId = 0;
       /*This function inserts the individual chat messages to db.*/
-      if($scope.paramDetails){
-        Chats.insert({
-          to: $scope.paramDetails.user_id,
-          from: $rootScope.userInfo.user_id,
-          message: $scope.enterMessage,
-          createdAt: new Date()
-        });
+      if(files == undefined || files == null || files.length == 0){
+        Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
       }
+      else{
+        if($scope.paramDetails){
+          var fsFile = new FS.File(files[0]);
+          fsFile.to = $scope.paramDetails.user_id;
+          fsFile.from = $rootScope.userInfo.user_id;
+          fsFile.message = $scope.message;
+          Images.insert(fsFile, function (err, fileObj){
+            console.log(fileObj);
+            imageId = fileObj._id;
+            console.log(imageId);
+            Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
+          });
+
+        }
+      }
+
       /*This would insert messages of group to db.*/
       if($scope.groupDetails){
-        Chats.insert({
-          to: $scope.groupDetails.block_id,
-          from: $rootScope.userInfo.user_id,
-          fromName: $rootScope.userInfo.username,
-          message: $scope.enterMessage,
-          createdAt: new Date()
-        });
+        Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage);
         console.log("Group Message inserted");
       }
       $scope.enterMessage = "";
     };
 
     /*Subscribing the chats collection.*/
-     $scope.subscribe('chats');
-     $scope.subscribe('images');
+     //$scope.subscribe('chats');
+     //$scope.subscribe('images');
+     var instant = $scope.subscribe('instantMessages');
+     console.log(instant);
      /*Retrieving the data from subscribed collection using helpers of Meteor.*/
      $scope.helpers({
          chatMessages: () => {
@@ -139,5 +154,11 @@ angular.module("chatApp")
          imageMessages: () => {
            return Images.find({});
          }
-       });
-};
+    });
+    // for(var itr=0; itr<$scope.chatMessages; itr++){
+    //   console.log($scope.chatMessages[itr]);
+    // }
+    // for(var itr=0; itr<$scope.imageMessages.length; itr++){
+    //   console.log($scope.imageMessages[itr]);
+    // }
+}
