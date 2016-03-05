@@ -77,23 +77,27 @@
 	</ion-header-bar>
 	<ion-content>
   	<span class="time-stamp-day">Yesterday</span>
-		<!--div class="chat" ng-show="individualChatFlag" ng-repeat="msg in chatMessages">
-			<div style="width: 100%;">
+		<div class="chat" ng-show="individualChatFlag">
+			<div style="width: 100%;"  ng-repeat="msg in chatMessages">
       	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==paramDetails.user_id">
 					<span>{{msg.message}}</span>
+					<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
+						<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt" ng-src="{{image.url()}}">
+					</div>
 					<span class="time-stamp" am-time-ago="msg.createdAt"></span>
 				</div>
 			</div>
 			<div style="width: 100%;">
 				<div class="bubble you" ng-if="msg.from==paramDetails.user_id && msg.to==userInfo.user_id">
-					<span>{{msg.message}}</span>
+					<span>{{msg}}</span>
 					<span class="time-stamp" am-time-ago="msg.createdAt"></span>
 				</div>
 			</div>
-		</div-->
-		<div ng-repeat="image in imageMessages">
-			<img ng-src="{{image.url()}}" style="height: 170px; weight: 170px;"/>
 		</div>
+		<!-- <div ng-repeat="image in imageMessages">
+			<img ng-src="{{image.url()}}" />
+			<span>{{image}}</span>
+		</div> -->
 		<div class="chat" ng-show="!individualChatFlag" ng-repeat="msg in chatMessages">
 			<div style="width: 100%;">
       	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==groupDetails.block_id">
@@ -119,7 +123,7 @@
 			class="button button-icon icon" style="margin-left: -1%;"-->
 			<!--input type="file" class="button"  ngf-select="" ngf-change="addImages($files)" ngf-multiple="false"
 			ngf-allow-dir="false" ngf-accept="'image/*'"-->
-			<input type="file" ngf-select="" name="file" ngf-accept="'image/*'" accept="image/*" ngf-change="addImages($files)">
+			<input type="file" ngf-select="" name="file" ngf-accept="'image/*'" accept="image/*" ngf-change="sendMessage($files)" style="width: inherit;">
 		</span>
 		<input type="text" class="send-message-text-area" placeholder="Type message" ng-model="enterMessage">
 		<button type="submit" class="emoticons-class"><img src="images/emoticon85.png" alt="Arrow Icon"></button>
