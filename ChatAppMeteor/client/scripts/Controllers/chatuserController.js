@@ -115,7 +115,12 @@ angular.module("chatApp")
       var imageId = 0;
       /*This function inserts the individual chat messages to db.*/
       if(files == undefined || files == null || files.length == 0){
-        Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
+        if($scope.paramDetails){
+          Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
+        }
+        if($scope.groupDetails){
+          Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId);
+        }
       }
       else{
         if($scope.paramDetails){
@@ -129,14 +134,19 @@ angular.module("chatApp")
             console.log(imageId);
             Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
           });
-
         }
-      }
-
-      /*This would insert messages of group to db.*/
-      if($scope.groupDetails){
-        Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage);
-        console.log("Group Message inserted");
+        if($scope.groupDetails){
+          var fsFile = new FS.File(files[0]);
+          fsFile.to = $scope.groupDetails.user_id;
+          fsFile.from = $rootScope.userInfo.user_id;
+          fsFile.message = $scope.message;
+          Images.insert(fsFile, function (err, fileObj){
+            console.log(fileObj);
+            imageId = fileObj._id;
+            console.log(imageId);
+            Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId);
+          });
+        }
       }
       $scope.enterMessage = "";
     };
