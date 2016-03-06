@@ -100,9 +100,34 @@
 				 </div>
 			 </div>
 		 </div>
-	 
-	<div class="chat" ng-show="!individualChatFlag">
-			<div style="width: 100%;" ng-repeat="msg in chatMessages">
+
+	<div class="chat" ng-show="!individualChatFlag" ng-repeat="msg in chatMessages">
+		<div>
+		<div style="width: 100%;">
+			<div class="bubble me" ng-hide="msg.message == '' && msg.imageId == 0"
+			 ng-if="msg.from==userInfo.user_id && msg.to==groupDetails.block_id">
+				<span>{{msg.message}}</span>
+				<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
+					<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt" ng-src="{{image.url()}}">
+				</div>
+				<span class="time-stamp" am-time-ago="msg.createdAt"></span>
+			</div>
+		</div>
+		<div style="width: 100%;">
+			<div class="bubble you" ng-hide="msg.message == '' && msg.imageId == 0"
+			 ng-if="msg.to==groupDetails.block_id && msg.from != userInfo.user_id">
+			  <span class="fromName">~{{msg.fromName}}</span>
+				<span>{{msg.message}}</span>
+					<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
+						<!-- <span class="fromName">~{{msg.fromName}}</span> -->
+						<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt"
+						 ng-src="{{image.url()}}">
+						 <span class="time-stamp" am-time-ago="msg.createdAt"></span>
+					 </div>
+				 </div>
+			 </div>
+		 </div>
+			<!-- <div style="width: 100%;" ng-repeat="msg in chatMessages">
       	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==groupDetails.block_id">
 					<span>{{msg.message}}</span>
 					<span class="time-stamp" am-time-ago="msg.createdAt"></span>
@@ -112,10 +137,9 @@
 				<div class="bubble you" ng-if="msg.to==groupDetails.block_id && msg.from != userInfo.user_id">
 					<span class="fromName">~{{msg.fromName}}</span>
 					<span>{{msg.message}}</span>
-					<!--span class="time-stamp">{{msg.createdAt| amCalendar }}</span-->
 					<span class="time-stamp" am-time-ago="msg.createdAt"></span>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</ion-content>
   <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
