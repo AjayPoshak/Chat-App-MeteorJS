@@ -8,12 +8,13 @@ Meteor.methods({
       createdAt: new Date()
     });
   },
-  'insertGroupMessage': function(block_id, user_id, username, msg){
+  'insertGroupMessage': function(block_id, user_id, username, msg, image_id){
     Chats.insert({
       to: block_id,
       from: user_id,
       fromName: username,
       message: msg,
+      imageId: image_id,
       createdAt: new Date()
     });
   }
