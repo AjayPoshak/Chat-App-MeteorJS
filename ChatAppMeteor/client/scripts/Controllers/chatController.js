@@ -66,4 +66,14 @@ angular.module("chatApp")
     {
         $location.path('/contact');
     }
+    //Subscribe the messages collection which stores the recent chats
+    $scope.subscribe("messages");
+    //Retrieving the entries from messages collection using helpers methods
+    $scope.helpers({
+      recentMessages: () => {
+        return Messages.find({}, {
+          sort: {createdAt: -1}
+        });
+      }
+    })
 };
