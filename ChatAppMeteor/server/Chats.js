@@ -6,6 +6,10 @@ Meteor.publish("images", function(){
   return Images.find();
 });
 */
+Meteor.publish("messages", function(){
+  return Messages.find();
+});
+
 Meteor.publishComposite("instantMessages", {
   find: function(){
     return Chats.find();
