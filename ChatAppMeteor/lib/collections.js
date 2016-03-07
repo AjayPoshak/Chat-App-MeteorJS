@@ -4,13 +4,23 @@ Images = new FS.Collection("images", {
 
 Chats = new Mongo.Collection('chats');
 
-
 Messages = new Mongo.Collection('messages');
+
 Chats.allow({
   insert: function(){
     return true;
   }
 });
+
+Messages.allow({
+  insert: function(){
+    return true;
+  },
+  update: function(){
+    return true;
+  }
+});
+
 Images.allow({
   insert: function(){
     return true;
