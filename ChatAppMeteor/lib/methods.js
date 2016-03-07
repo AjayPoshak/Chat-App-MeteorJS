@@ -17,5 +17,31 @@ Meteor.methods({
       imageId: image_id,
       createdAt: new Date()
     });
+  },
+  'updateRecentMessage': function(rec_id, sender_id, msg, image_id, profile_image, user_name){
+    var result = Messages.findOne({to: rec_id, from: sender_id});
+    console.log(result);
+    if(result == undefined || result == null){
+      Messages.insert({
+        to: rec_id,
+        from: sender_id,
+        profile_image: profile_image,
+        username: user_name,
+        message: msg,
+        createdAt: new Date()
+      });
+    }
+    else{
+      console.log("need to update existing messages");
+      Messages.update({
+        _id: result._id
+      },
+    {
+      $set:{
+        message: msg,
+        createdAt: new Date()
+      }
+    });
+    }
   }
 });
