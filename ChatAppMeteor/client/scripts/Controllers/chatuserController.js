@@ -2,7 +2,7 @@
 angular.module("chatApp")
   .controller('chatuserCtrl', chatuserCtrl);
 
-  function chatuserCtrl($scope, $state, Upload, $rootScope, chatService, $location, $window, $stateParams) {
+  function chatuserCtrl($scope, $state, Upload, $rootScope, chatService, $location, $ionicScrollDelegate, $stateParams, $timeout) {
     $scope.enterMessage = null; //Message entered by user.
     $scope.individualChatFlag = false; //Flag for individual chat.
     $scope.paramDetails = null;
@@ -117,9 +117,13 @@ angular.module("chatApp")
       if(files == undefined || files == null || files.length == 0){
         if($scope.paramDetails){
           Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
+          Meteor.call('updateRecentMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
+          $scope.paramDetails.profile_image, $scope.paramDetails.username);
         }
         if($scope.groupDetails){
           Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId);
+          Meteor.call('updateRecentMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
+           null, $scope.groupDetails.block_name);
         }
       }
       else{
@@ -133,6 +137,8 @@ angular.module("chatApp")
             imageId = fileObj._id;
             console.log(imageId);
             Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
+            Meteor.call('updateRecentMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, "Image", imageId,
+             $scope.paramDetails.profile_image, $scope.paramDetails.username);
           });
         }
         if($scope.groupDetails){
@@ -145,6 +151,8 @@ angular.module("chatApp")
             imageId = fileObj._id;
             console.log(imageId);
             Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId);
+            Meteor.call('updateRecentMessage', $scope.paramDetails.block_id, $rootScope.userInfo.user_id, "Image", imageId,
+             $scope.paramDetails.profile_image, $scope.paramDetails.username);
           });
         }
       }
@@ -165,10 +173,27 @@ angular.module("chatApp")
            return Images.find({});
          }
     });
-    // for(var itr=0; itr<$scope.chatMessages; itr++){
-    //   console.log($scope.chatMessages[itr]);
-    // }
-    // for(var itr=0; itr<$scope.imageMessages.length; itr++){
-    //   console.log($scope.imageMessages[itr]);
-    // }
+    /*
+    *scroll on input focus
+    */
+    let isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
+    $scope.inputUp = function(){
+      console.log("Received focus");
+      if (isIOS) {
+      this.keyboardHeight = 216;
+      }
+      $timeout(function() {
+        $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom();
+      }, 300);
+    };
+    /*
+    *scroll on input blur
+    */
+    $scope.inputDown = function(){
+      console.log("Blurred");
+      if (isIOS) {
+      this.keyboardHeight = 0;
+      }
+      $ionicScrollDelegate.$getByHandle('chatScroll').resize();
+    };
 }
