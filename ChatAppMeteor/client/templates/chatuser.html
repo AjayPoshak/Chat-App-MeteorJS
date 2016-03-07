@@ -73,7 +73,7 @@
 		<button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-left:15%;width: 100%" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
 		<button style="margin-top: 2%;margin-right: 20px;" class="button button-icon icon custom-button-group button-setting toggle-class-left chat-user-setting" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
 	</ion-header-bar>
-	<ion-content>
+	<ion-content delegate-handle="chatScroll">
   	<span class="time-stamp-day">Yesterday</span>
 		<div class="chat" ng-show="individualChatFlag" ng-repeat="msg in chatMessages">
 			<div>
@@ -150,9 +150,11 @@
 			class="button button-icon icon" style="margin-left: -1%;"-->
 			<!--input type="file" class="button"  ngf-select="" ngf-change="addImages($files)" ngf-multiple="false"
 			ngf-allow-dir="false" ngf-accept="'image/*'"-->
-			<input type="file" ngf-select="" name="file" ngf-accept="'image/*'" accept="image/*" ngf-change="sendMessage($files)" style="width: inherit;">
+			<input type="file" ngf-select="" name="file" ngf-accept="'image/*'" accept="image/*"
+			ngf-change="sendMessage($files)" style="width: inherit;" >
 		</span>
-		<input type="text" class="send-message-text-area" placeholder="Type message" ng-model="enterMessage">
+		<input type="text" class="send-message-text-area" placeholder="Type message" ng-model="enterMessage"
+		ng-focus="inputUp()" ng-blur="inputDown()">
 		<button type="submit" class="emoticons-class"><img src="images/emoticon85.png" alt="Arrow Icon"></button>
     <button class="button button-clear" style="margin-left:0; width: 20%; margin-right: -3%;margin-top: 7px;" ng-click="sendMessage()">
 		<img src="images/Send.png" alt="send" />
