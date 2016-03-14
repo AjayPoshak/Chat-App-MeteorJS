@@ -4,7 +4,8 @@
       <div class="">
         <button class="button button-icon icon button-back" ng-click="BacktoGroup()"></button>
         <button class="button chat-user-name" style="margin-left: 10%;">{{blockData.block_name}}</button>
-        <button class="button button-icon icon button-edit-group custom-button-group float-right" ng-click="editGroup()"></button>
+        <button ng-show="blockData.type == 'personal'" class="button button-icon icon button-edit-group custom-button-group float-right" ng-click="editGroup()">
+        </button>
       </div>
     </div>
   </ion-header-bar>
