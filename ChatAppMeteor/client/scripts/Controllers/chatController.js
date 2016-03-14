@@ -5,10 +5,10 @@ angular.module("chatApp")
   function chatCtrl($scope, $rootScope, chatService, $window, $http, $state, $location, $timeout, $ionicModal, $ionicSideMenuDelegate) {
     $scope.displaySideBar = false;
     $scope.popupClass='button-setting';
-    var current = {};
-    current = JSON.parse(localStorage.getItem("userDetails"));
-    console.log("apartment_id::"+current.apartment_id);
-    chatService.getUserByApartment(current.apartment_id)
+    $scope.current = {};
+    $scope.current = JSON.parse(localStorage.getItem("userDetails"));
+    console.log("apartment_id::"+$scope.current.apartment_id);
+    chatService.getUserByApartment($scope.current.apartment_id)
       .then(function(response){
         $rootScope.chatContacts = response;
         window.localStorage["userData"] = angular.toJson(response);
@@ -26,37 +26,45 @@ angular.module("chatApp")
         $scope.popupClass = 'close-button-setting';
         }
     };
-    $scope.isSerachtrue = false;
+    $scope.isSearchtrue = false;
 
     $scope.addNewUser = function ()
     {
         $location.path('addgroup');
     };
 
-    $scope.isSerachtrue = false;
+    $scope.isSearchtrue = false;
     $rootScope.isConatct = false;
-//to show search bar
+    /**
+     * Shows the searchBar in view
+     */
     $scope.showsearchBar = function ()
     {
-        $scope.isSerachtrue = true;
-
+        $scope.isSearchtrue = true;
     };
-
-//hide search bar
-
-    $scope.hideSerarchbar = function ()
+    /**
+     * Hides the searchbar in view
+     */
+    $scope.hideSearchbar = function ()
     {
-        $scope.isSerachtrue = false;
+        $scope.isSearchtrue = false;
     };
     //for left toggle navigation
     $scope.goToGroup = function ()
     {
         $location.path('/group');
     }
-    $scope.changePath = function ()
+    /*
+    *Redirects the user to chat screen
+    *@method changePath
+    *@param {object} User Information
+    */
+    $scope.changePath = function (userInfo)
     {
+        console.log(userInfo);
+        var userParam = JSON.stringify(userInfo);
         setTimeout(function () {
-            $location.path('/chatuser');
+            $state.go('chatuser',{userDetailParam:userParam});
             $scope.$apply();
         }, 80);
 
@@ -71,7 +79,13 @@ angular.module("chatApp")
     //Retrieving the entries from messages collection using helpers methods
     $scope.helpers({
       recentMessages: () => {
-        return Messages.find({}, {
+        return Messages.find({
+           $or:
+           [ { "from": $scope.current.user_id },
+            { "to": $scope.current.user_id }
+           ]
+        },
+         {
           sort: {createdAt: -1}
         });
       }
