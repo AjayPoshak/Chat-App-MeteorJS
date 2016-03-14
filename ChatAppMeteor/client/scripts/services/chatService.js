@@ -32,5 +32,33 @@ angular.module("chatApp")
       //return $http.get("data/userInfo.json");
     };
 
+    this.postNewGroup = function(newGroupData){
+      console.log("Posting new group info"+JSON.stringify(newGroupData));
+      return $http({
+        method: 'POST',
+        url:'http://service.citze.in/api/AddModifyGroup',
+        data: JSON.stringify(newGroupData),
+        headers: {'Content-Type':'application/json;charset=UTF-8'}
+      });
+    };
 
+    this.postUpdateGroup = function(updateGroupData){
+      console.log("Posting the update group info"+JSON.stringify(updateGroupData));
+      return $http({
+        method: 'POST',
+        url: 'http://service.citze.in/api/RemoveUsersFromGroup',
+        data: JSON.stringify(updateGroupData),
+        headers: {'Content-Type':'application/json;charset=UTF-8'}
+      });
+    };
+
+    this.postUsersGroup = function(addUsersGroup){
+      console.log("Adding users to existing group"+JSON.stringify(addUsersGroup));
+      return $http({
+        method: 'POST',
+        url: 'http://service.citze.in/api/AddModifyGroup',
+        data: JSON.stringify(addUsersGroup),
+        headers: {'Content-Type':'application/json;charset=UTF-8'}
+      });
+    };
   }
