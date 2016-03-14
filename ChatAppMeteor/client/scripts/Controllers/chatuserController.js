@@ -42,6 +42,11 @@ angular.module("chatApp")
         $scope.popupClass = 'close-button-setting';
         }
     };
+    /**
+     * Show and hide
+      the attachment
+     * @method showAttachment
+     */
     $scope.showAttachment = function() {
       if($scope.displayAttachment) {
         $scope.displayAttachment = false;
@@ -50,26 +55,17 @@ angular.module("chatApp")
         $scope.displayAttachment = true;
       }
     };
-
+    
     //This is the Ionic Popup
     $scope.showSideBar = function(){
         var myPopup = $ionicPopup.show({
           template: ''
         });
     };
-    /*
-    * Upload images to db.
-    */
-    /*$scope.uploadImage = function(){
-      console.log("file upload"+$scope.file);
-      console.log("uploading image...");
-        Chats.insert({
-          to: $scope.paramDetails.user_id,
-          from: $rootScope.userInfo.user_id,
-          message: $scope.file,
-          createdAt: new Date()
-        });
-    };*/
+    /**
+     * Add the image to database
+     * @param  {file} files file selected by user at view
+     */
     $scope.addImages = function(files){
       console.log(files[0]);
       var fsFile = new FS.File(files[0]);
@@ -113,17 +109,44 @@ angular.module("chatApp")
       console.log("Message Entered::"+$scope.enterMessage);
       console.log(files);
       var imageId = 0;
+      /*
+      *This var is to indicate whether a msg is a group message or not.  This is used
+      *only for updateRecentMessage method call.
+      *groupMessage = true; it is a group message;
+       */
+      var groupMessage = false;
       /*This function inserts the individual chat messages to db.*/
       if(files == undefined || files == null || files.length == 0){
         if($scope.paramDetails){
-          Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
-          Meteor.call('updateRecentMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
-          $scope.paramDetails.profile_image, $scope.paramDetails.username);
+          Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
+          function(error, result){
+            if(error){
+              console.error(error);
+            }
+            if(result){
+              console.log(result);
+            }
+          });
+          console.log($scope.paramDetails); //Receiver Info
+          console.log($rootScope.userInfo); //Sender Info
+          Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
+           angular.toJson($scope.paramDetails), angular.toJson($scope.userInfo));
         }
         if($scope.groupDetails){
-          Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId);
-          Meteor.call('updateRecentMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
-           null, $scope.groupDetails.block_name);
+          Meteor.call('insertGroupMessage', $scope.groupDetails.block_id,
+          $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId,
+          function(error, result){
+            if(error){
+              console.error(error);
+            }
+            if(result){
+              console.log(result);
+            }
+          });
+          groupMessage = true;
+          Meteor.call('updateRecentMessage', groupMessage, $scope.groupDetails.block_id,
+           $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
+           angular.toJson($scope.groupDetails), $scope.groupDetails.block_name);
         }
       }
       else{
@@ -137,8 +160,8 @@ angular.module("chatApp")
             imageId = fileObj._id;
             console.log(imageId);
             Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId);
-            Meteor.call('updateRecentMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, "Image", imageId,
-             $scope.paramDetails.profile_image, $scope.paramDetails.username);
+            Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.user_id, $rootScope.userInfo.user_id, "Image", imageId,
+             angular.toJson($scope.paramDetails), angular.toJson($scope.userInfo));
           });
         }
         if($scope.groupDetails){
@@ -150,8 +173,9 @@ angular.module("chatApp")
             console.log(fileObj);
             imageId = fileObj._id;
             console.log(imageId);
+            groupMessage = true;
             Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId);
-            Meteor.call('updateRecentMessage', $scope.paramDetails.block_id, $rootScope.userInfo.user_id, "Image", imageId,
+            Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.block_id, $rootScope.userInfo.user_id, "Image", imageId,
              $scope.paramDetails.profile_image, $scope.paramDetails.username);
           });
         }
