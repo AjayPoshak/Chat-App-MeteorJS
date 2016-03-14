@@ -1,44 +1,24 @@
 <section>
-                      <ion-header-bar class="bar bar-header">
-                <div class="ion-header" style="width: 100%">
-                    
-                    <div class="">
-
-                        <button class="button button-icon icon button-back" ng-click="BacktoEditGroup()"></button>
-                        <button class="button chat-user-name" style="margin-left: 10%;">Friends1</button>
-                        <button class="button button-icon icon button-create float-right" ng-click="SetGroup()"></button>
-                        <button class="button button-icon icon button-add-user-group edit-group-class float-right" ng-click="addContact()"></button>
-                    </div>
-
-                </div>	 
-            </ion-header-bar>
-			<ion-content>
-                            <div class="create-group-div">
-                             <input type="text" class="search-area-class-filter form-control" placeholder="Search...">    
-                            </div>
-                            <ion-list class="js-dynamitable">
-                    <a class="item item-avatar a-class-border" ng-click="changePath()">
-                        <img src="images/satya.jpg">
-                        <h2 class="display-inline item-center-list">Satya</h2>
-                        <button class="button button-icon button-select-user-activated icon custom-button-group float-right" ng-click="SelectUser()"></button>
-                       
-                    </a>
-                    <a class="item item-avatar a-class-border" ng-click="changePath()">
-                        <img src="images/sundar.jpg">
-                        <h2 class="display-inline item-center-list">Sundar</h2>
-                       <button class="button button-icon button-select-user-activated icon custom-button-group float-right" ng-click="SelectUser()"></button>
-                    </a>
-                    <a class="item item-avatar a-class-border" ng-click="changePath()">
-                        <img src="images/turing.jpg">
-                        <h2 class="display-inline item-center-list">Alan Turing</h2>
-                       <button class="button button-icon button-select-user-activated icon  custom-button-group float-right"  ng-click="SelectUser()"></button>
-                    </a>
-                    <a class="item item-avatar a-class-border" ng-click="changePath()">
-                        <img src="images/rajni.jpg">
-                        <h2 class="display-inline item-center-list">Rajni</h2>
-                       <button class="button button-icon button-select-user-activated icon custom-button-group float-right" ng-click="SelectUser()"></button>
-                    </a>
-                </ion-list>
-		  </ion-content>
-		
-	</section>
+  <ion-header-bar class="bar bar-header">
+    <div class="ion-header" style="width: 100%">
+      <div class="">
+        <button class="button button-icon icon button-back" ng-click="BacktoEditGroup()"></button>
+        <button class="button chat-user-name" style="margin-left: 10%;">Friends1</button>
+        <button class="button button-icon icon button-create float-right" ng-click="SetGroup()"></button>
+        <button class="button button-icon icon button-add-user-group edit-group-class float-right" ng-click="addContact()"></button>
+      </div>
+    </div>
+  </ion-header-bar>
+	<ion-content>
+    <div class="create-group-div">
+     <input type="text" class="search-area-class-filter form-control" placeholder="Search...">
+    </div>
+    <ion-list>
+      <a class="item item-avatar a-class-border" ng-click="changePath()" ng-repeat="data in blockData.users|filter: search">
+      <img ng-src="{{data.profile_image}}">
+      <h2 class="display-inline item-center-list">{{data.username}}</h2>
+      <button class="button button-icon button-select-user-activated icon custom-button-group float-right" ng-click="SelectUser($event, data.user_id)"></button>
+      </a>
+  </ion-list>
+  </ion-content>
+</section>
