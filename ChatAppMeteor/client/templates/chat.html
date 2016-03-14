@@ -2,33 +2,63 @@
 .list {
   height: 31.5%;
 }
+span > img{
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
 </style>
 <section style="height:100%">
   <ion-header-bar class="bar bar-header">
       <div class="ion-header" style="width: 100%">
-          <div class="" ng-hide="isSerachtrue">
+          <div class="" ng-hide="isSearchtrue">
               <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
               <button class="button button-icon icon  button-setting custom-button-group toggle-class-left" style="margin-right: 15px;" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
               <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="goToGroup()"></button>
               <button class="button button-icon icon button-user custom-button-group toggle-class-left" ng-click="goToContact()"></button>
               <button class="button button-icon icon button-search custom-button-group toggle-class-left" ng-click="showsearchBar()"></button>
           </div>
-          <div ng-show="isSerachtrue">
-              <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="hideSerarchbar()"></button>
+          <div ng-show="isSearchtrue">
+              <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="hideSearchbar()"></button>
               <input type="text" ng-model="search" class="search-area-class js-filter  form-control" placeholder="Search...">
           </div>
       </div>
   </ion-header-bar>
   <ion-content>
   <ion-list>
-      <a class="item item-avatar a-class-border" ng-click="changePath()" ng-repeat="recent in recentMessages| filter: search">
-          <img ng-src="{{recent.profile_image}}">
-          <h2 class="display-inline h2-font-wieght">{{recent.username}}</h2>
-          <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
-          <p style="padding-top: 5px;">
-              <img src="images/Blue-tick2.png" class="tick-image-class">
-              <span>{{recent.message}}</span>
-          </p>
+      <a class="item item-avatar a-class-border" ng-repeat="recent in recentMessages| filter: search">
+          <span ng-if="recent.sender.user_id != current.user_id && recent.groupMessage == false" ng-click="changePath(recent.sender)">
+            <img ng-src="{{recent.sender.profile_image}}">
+            <h2 class="display-inline h2-font-wieght">{{recent.sender.username}}</h2>
+            <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
+            <p style="padding-top: 5px;">
+                <img src="images/Blue-tick2.png" class="tick-image-class">
+                <span>{{recent.message}}</span>
+            </p>
+          </span>
+          <span ng-if="recent.receiver.user_id != current.user_id && recent.groupMessage == false" ng-click="changePath(recent.receiver)">
+            <img ng-src="{{recent.receiver.profile_image}}">
+            <h2 class="display-inline h2-font-wieght">{{recent.receiver.username}}</h2>
+            <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
+            <p style="padding-top: 5px;">
+                <img src="images/Blue-tick2.png" class="tick-image-class">
+                <span>{{recent.message}}</span>
+            </p>
+          </span>
+          <span ng-if="recent.groupMessage == true" ng-click="changePath(recent.receiver)">
+            <img ng-src="{{recent.receiver.profile_image}}">
+            <h2 class="display-inline h2-font-wieght">{{recent.sender}}</h2>
+            <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
+            <p style="padding-top: 5px;">
+                <img src="images/Blue-tick2.png" class="tick-image-class">
+                <span>{{recent.message}}</span>
+            </p>
+          </span>
       </a>
   </ion-list>
   </ion-content>
