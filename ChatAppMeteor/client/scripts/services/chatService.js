@@ -3,9 +3,6 @@ angular.module("chatApp")
   .service("chatService", chatService);
 
   function chatService($resource, $http) {
-    this.getChatMessages = function(){
-      return $http.get("data/chatData.json");
-    };
 
     this.getUserByApartment = function(apartment_id){
       var apartmentId = {
@@ -58,6 +55,16 @@ angular.module("chatApp")
         method: 'POST',
         url: 'http://service.citze.in/api/AddModifyGroup',
         data: JSON.stringify(addUsersGroup),
+        headers: {'Content-Type':'application/json;charset=UTF-8'}
+      });
+    };
+
+    this.leftGroup = function(blockedGroup){
+      console.log("Removing the block...."+JSON.stringify(blockedGroup));
+      return $http({
+        method: 'POST',
+        url: 'http://service.citze.in/api/LeftAGroup',
+        data: JSON.stringify(blockedGroup),
         headers: {'Content-Type':'application/json;charset=UTF-8'}
       });
     };
