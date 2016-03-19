@@ -6,7 +6,7 @@ function editgroupCtrl($scope, $rootScope, $location, $window, $stateParams, $st
   /*
    * Set data in rootscope when we are getting data through url parameter,
    * so that it can reused when we come back from next page, when there would be no
-   * url parameter to provide data. 
+   * url parameter to provide data.
    */
   if($scope.blockData == null || $scope.blockData == ''){
     console.log("No data in scope");
@@ -23,9 +23,9 @@ function editgroupCtrl($scope, $rootScope, $location, $window, $stateParams, $st
   }
   $scope.addContact = function ()
   {
-      var blockId = JSON.stringify($scope.blockData.block_id);
-      console.log(blockId);
-      $state.go('addcontact', {block_id: blockId});
+      console.log($scope.blockData.block_id);
+      var blockId = $scope.blockData.block_id;
+      $state.go('addcontact',{blockIdParam:blockId});
   }
   $scope.SetGroup = function()
   {
@@ -53,12 +53,11 @@ function editgroupCtrl($scope, $rootScope, $location, $window, $stateParams, $st
           .error(function(err){
             console.log(err);
           })
-
-      }
+        }
       else{
         alert("Please select the members to be removed");
       }
-      //$location.path('/chat');
+      $location.path('/chat');
   }
 
   $scope.SelectUser = function(event, user_id){
