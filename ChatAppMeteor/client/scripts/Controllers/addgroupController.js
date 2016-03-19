@@ -91,7 +91,8 @@ angular.module("chatApp")
             chatService.postNewGroup(newGroupData)
               .success(function(response){
                 console.log(response.data);
-                window.localStorage[$scope.newGroupName] = angular.toJson(response);
+                window.localStorage["userData"] = angular.toJson(response);
+                $location.path('/chat');
               })
               .error(function(err){
                 console.log(err);
