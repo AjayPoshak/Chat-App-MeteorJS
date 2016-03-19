@@ -436,7 +436,7 @@ input[type="text"], input[type="password"] {
   float:left;
   margin-left: 33%;
 }
-.h2-font-wieght
+.h2-font-weight
 {
     font-weight: 600 !important;
 }
@@ -653,11 +653,11 @@ input[type="text"], input[type="password"] {
 }
 .close-button-setting {
     background: url(images/Settings_Cross.png) no-repeat;
-    cursor: pointer;
+    /*cursor: pointer;*/
     border: none;
     height: 24px;
     width: 24px;
-    background-position: center;
+    /*background-position: center;*/
 }
 .button-search
 {
