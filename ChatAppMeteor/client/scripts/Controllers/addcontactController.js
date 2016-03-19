@@ -4,7 +4,9 @@ angular.module("chatApp")
 function addcontactCtrl($scope, $rootScope, $location, $stateParams, chatService) {
   $scope.users = [];
   var current = [];
-  $scope.block_id = $stateParams.block_id;
+  $scope.block_id = $stateParams.blockIdParam ;
+  //console.log($scope.block_id);
+
   if(!$rootScope.chatContacts){
     current = $rootScope.chatContacts = JSON.parse(localStorage.getItem("userData"));
     console.log("getting from local...");
@@ -79,6 +81,7 @@ function addcontactCtrl($scope, $rootScope, $location, $stateParams, chatService
       }
       $scope.users.length--;
     }
+
   };
   $scope.SetGroup = function(){
     var addUsersGroup = {
@@ -91,6 +94,7 @@ function addcontactCtrl($scope, $rootScope, $location, $stateParams, chatService
       })
       .error(function(err){
         console.log(err);
-      })
+      });
+      $location.path('/chat');
   }
 };
