@@ -2,13 +2,41 @@
 angular.module("chatApp")
   .controller('chatuserCtrl', chatuserCtrl);
 
+  function chatuserCtrl($scope, $state, Upload, $rootScope, $anchorScroll,chatService,$ionicPopup, $location, $ionicScrollDelegate, $stateParams, $timeout) {
+    /*Retrieving the information of user who has logged in.*/
 
-  function chatuserCtrl($scope, $state, Upload, $rootScope, chatService, $location, $ionicScrollDelegate, $stateParams, $timeout) {
+     $scope.UserisBlocked = false;
+    if(!$rootScope.userInfo){
+      $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
+      console.log("getting from local...");
+      console.log("userInfo"+$rootScope.userInfo);
+    }
+    $scope.chatLimit = 10;
+    //get today's date and append to chat
+
+    var currentTime = new Date()
+    var month = currentTime.getMonth() + 1
+    var day = currentTime.getDate()
+    var year = currentTime.getFullYear()
+
+    if(day<10)
+    {
+        day = '0' + day;
+    }
+    if(month<10)
+    {
+      month = '0' + month;
+    }
+    $scope.checkTodayDate = (month + "/" + day + "/" + year);
+    //$scope.isReceiverBlocked = false;
+    /* Checking the internet connection in every 1 minute, and calling
+    *	the function to update the delivery of message.
+    */
     var connectionStatus = null;
     setInterval(function(){
       connectionStatus = checkConnectionStatus();
       if(connectionStatus === "online"){
-        console.log("Now ONLINE.....updating deliveries");
+        //console.log("Now ONLINE.....updating deliveries");
         Meteor.call('updateMsgReached', $rootScope.userInfo.user_id);
       }
     }, 60 * 1000);
@@ -33,14 +61,15 @@ angular.module("chatApp")
       $scope.individualChatFlag = false; //Flag unset for individual chat, group chat enabled.
     }
     console.log("individualChatFlag::"+$scope.individualChatFlag);
-    /*Retrieving the information of user who has logged in.*/
-    if(!$rootScope.userInfo){
-      $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
-      console.log("getting from local...");
-      console.log("userInfo"+$rootScope.userInfo);
-    }
-    console.log("userInfo"+$rootScope.userInfo.user_id);
 
+    console.log("Read the messages");
+    /*Double Tick functionlity for individual chat*/
+    if($scope.paramDetails){
+        Meteor.call("updateDeliveryMessage", $rootScope.userInfo.user_id, $scope.paramDetails.user_id);
+          setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 1);
+    }
     $scope.toggleSideBar = function () {
         //$ionicSideMenuDelegate.toggleRight();
         if($scope.displaySideBar){
@@ -52,6 +81,10 @@ angular.module("chatApp")
         $scope.popupClass = 'close-button-setting';
         }
     };
+    $scope.dateNow = function(date){
+      console.log(date);
+      return true;
+    }
     /**
      * Show and hide
       the attachment
@@ -85,6 +118,14 @@ angular.module("chatApp")
         console.log(fileObj);
       });
     };
+
+   var span = $('<span>').css('display','inline-block')
+.css('word-break','break-all').appendTo('body').css('visibility','hidden');
+function initSpan(textarea){
+  span.text(textarea.text())
+      .width(textarea.width())
+      .css('font',textarea.css('font'));
+}
 
 //functionlity on back button
 
@@ -129,16 +170,23 @@ angular.module("chatApp")
           /*Checking if sender is blocked by receiver*/
           var isSenderBlocked = checkSenderBlocked($rootScope.userInfo.user_id);
           /*Checking if sender has blocked the receiver*/
-          var isReceiverBlocked = checkReceiverBlocked();
-          if(isSenderBlocked || isReceiverBlocked){
+          $scope.isReceiverBlocked = checkReceiverBlocked();
+          console.log($scope.isReceiverBlocked);
+          if(isSenderBlocked || $scope.isReceiverBlocked){
             console.log("receiver has already blocked the sender...");
             console.log("Or sender has blocked the receiver.....");
-            Meteor.call('insertMessage', "-1", $rootScope.userInfo.user_id, $scope.enterMessage, imageId, $scope.blockedId, connectionStatus);
+            Meteor.call('insertMessage', "-1", $rootScope.userInfo.user_id, $scope.enterMessage,imageId, $scope.blockedId, connectionStatus);
+            setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 1);
           }
           else{
             Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId, $scope.blockedId, connectionStatus);
             Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
              angular.toJson($scope.paramDetails), angular.toJson($scope.userInfo), connectionStatus);
+              setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 1);
           }
           console.log($scope.paramDetails); //Receiver Info
           console.log($rootScope.userInfo); //Sender Info
@@ -150,6 +198,9 @@ angular.module("chatApp")
           Meteor.call('updateRecentMessage', groupMessage, $scope.groupDetails.block_id,
            $rootScope.userInfo.user_id, $scope.enterMessage, imageId,
            angular.toJson($scope.groupDetails), $scope.groupDetails.block_name, connectionStatus);
+            setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 1);
         }
       }
       else{
@@ -165,6 +216,9 @@ angular.module("chatApp")
             Meteor.call('insertMessage', $scope.paramDetails.user_id, $rootScope.userInfo.user_id, $scope.enterMessage, imageId, connectionStatus);
             Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.user_id, $rootScope.userInfo.user_id, "Image", imageId,
              angular.toJson($scope.paramDetails), angular.toJson($scope.userInfo), connectionStatus);
+           setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 1);
           });
         }
         if($scope.groupDetails){
@@ -179,8 +233,11 @@ angular.module("chatApp")
             groupMessage = true;
             Meteor.call('insertGroupMessage', $scope.groupDetails.block_id, $rootScope.userInfo.user_id, $rootScope.userInfo.username, $scope.enterMessage, imageId, connectionStatus
           );
-            Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.block_id, $rootScope.userInfo.user_id, "Image", imageId,
+            Meteor.call('updateRecentMessage', groupMessage, $scope.paramDetails.block_id,$rootScope.userInfo.user_id, "Image", imageId,
              $scope.paramDetails.profile_image, $scope.paramDetails.username, connectionStatus);
+           setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 1);
           });
         }
       }
@@ -198,7 +255,12 @@ angular.module("chatApp")
     /*Subscribing the chats collection.*/
      //$scope.subscribe('chats');
      //$scope.subscribe('images');
-     Meteor.subscribe('instantMessages', $rootScope.userInfo.user_id);
+     if($scope.paramDetails){
+        Meteor.subscribe('instantMessages', $rootScope.userInfo.user_id, "infinite");
+     }
+     if($scope.groupDetails){
+       Meteor.subscribe('instantMessages', $rootScope.userInfo.user_id, $scope.groupDetails.block_id);
+     }
      $scope.subscribe('blockedUsers');
      /*Retrieving the data from subscribed collection using helpers of Meteor.*/
      $scope.helpers({
@@ -212,9 +274,32 @@ angular.module("chatApp")
            return BlockedUsers.find({});
          }
     });
-    console.log($scope.chatMessages);
+    /*Checking whther the user is blocked or not*/
+    setTimeout(function(){
+      $scope.isReceiverBlocked = checkReceiverBlocked();
+      console.log($scope.isReceiverBlocked);
+    }, 600);
+
+
+    //filter message on date bases
+    $scope.chatToFilter = function(){
+  $scope.indexedGenres = [];
+  return $scope.chatMessages;
+};
+
+//filter basis on index if new
+$scope.filterGenres = function(msg) {
+        var genreIsNew = $scope.indexedGenres.indexOf(msg.todaysdate) == -1;
+        if (genreIsNew) {
+            $scope.indexedGenres.push(msg.todaysdate);
+        }
+        return genreIsNew;
+    };
+
+    //console.log($scope.chatMessages);
+
     /*
-    *scroll on input focus
+    * scroll on input focus
     */
     let isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
     $scope.inputUp = function(){
@@ -224,7 +309,7 @@ angular.module("chatApp")
       }
       $timeout(function() {
         $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom();
-      }, 300);
+      }, 30);
     };
     /*
     *scroll on input blur
@@ -237,10 +322,22 @@ angular.module("chatApp")
       $ionicScrollDelegate.$getByHandle('chatScroll').resize();
     };
     $scope.blockUser = function(){
-      alert("blocking this user");
       if($scope.individualChatFlag){
-        console.log("Blocking the user::"+$scope.paramDetails.user_id);
-        Meteor.call('insertBlockUser', $scope.paramDetails.user_id, $rootScope.userInfo.user_id);
+          $ionicPopup.confirm({
+             title: 'Confirm Block',
+             template: 'Are you sure you want Block ?'
+           }).then(function(res) {
+             if(res) {
+                Meteor.call('insertBlockUser', $scope.paramDetails.user_id, $rootScope.userInfo.user_id);
+                  chatService.BlockpersonalUser($rootScope.userInfo.user_id,$rootScope.userInfo.apartment_id,$scope.paramDetails.user_id)
+                .then(function(response){
+                  console.log(response);
+                 $scope.UserisBlocked = true;
+                });
+             } else {
+
+             }
+           });
       }
       else{
         console.log("Blocking the group..."+$scope.groupDetails.block_id);
@@ -253,9 +350,22 @@ angular.module("chatApp")
           .then(function(response){
             console.log(response);
             window.localStorage["userData"] = angular.toJson(response);
+                    $location.path('/chat');
           });
         };
-        $location.path('/chat');
+
+    };
+
+    $scope.unBlockUser = function(){
+     if($scope.individualChatFlag){
+      Meteor.call('unblockUser', $rootScope.userInfo.user_id, $scope.paramDetails.user_id);
+      $scope.isReceiverBlocked = false;
+       chatService.UnBlockpersonalUser($rootScope.userInfo.user_id,$rootScope.userInfo.apartment_id,$scope.paramDetails.user_id)
+            .then(function(response){
+              console.log(response);
+             $scope.UserisBlocked = false;
+            });
+    }
     }
     function checkSenderBlocked(user_id){
       console.log($scope.blockedUsers);
@@ -279,6 +389,18 @@ angular.module("chatApp")
       }
       return false;
     };
+    /**
+     * * function forlogout reset local storage and move to login page
+     * @Author- Himanshu Gupta
+     */
+     $scope.logOut = function()
+     {
+        localStorage.removeItem('userDetails');
+        localStorage.removeItem('userData');
+        localStorage.removeItem('groupData');
+        $location.path('/login');
+     }
+
     function checkReceiverBlocked(){
       console.log($scope.blockedUsers);
       if($scope.blockedUsers === null || $scope.blockedUsers.length <= 0){
@@ -300,4 +422,72 @@ angular.module("chatApp")
       }
       return false;
     };
+    //function to get groupdata detail like blocked user and push notoification state
+    function geUserPersonalDetail()
+    {
+      if($scope.individualChatFlag)
+      {
+        chatService.getGroupData($rootScope.userInfo.user_id,$rootScope.userInfo.apartment_id)
+            .then(function(response){
+              console.log(response);
+          var itr = 0;
+          console.log(response.data.blocked_users);
+          for(itr in response.data.blocked_users){
+          if($scope.paramDetails.user_id == response.data.blocked_users[itr].user_id)
+          {
+              $scope.UserisBlocked = true;
+          }
+        }
+            });
+      }
+    }
+    function getOtherUserDetail()
+    {
+      if($scope.individualChatFlag)
+      {
+        chatService.getOtherUserInfo($scope.paramDetails.user_id,$rootScope.userInfo.apartment_id)
+            .then(function(response){
+              console.log(response);
+              $rootScope.OtherUserInfo = response;
+            });
+      }
+    }
+    setTimeout(function() {
+                $scope.chatLimit = 500;
+        }, 500);
+        setTimeout(function() {
+                $ionicScrollDelegate.scrollBottom(true);
+        }, 700);
+    //function to show user info in one to one chat
+
+    $scope.showUserInfo = function()
+    {
+          if($scope.individualChatFlag)
+          {
+              $ionicPopup.alert({
+             templateUrl: 'client/templates/Userinfo.html'
+           })
+          .then(function(res) {
+
+           });
+        }
+    }
+
+    //function to get user call number
+    $scope.GetotherPhonenumber = function()
+    {
+        if($scope.individualChatFlag)
+          {
+
+              $ionicPopup.alert({
+                  title: $rootScope.OtherUserInfo.data.PhoneNo,
+                  content: ''
+                }).then(function(res) {
+                });
+        }
+    }
+
+    //
+    getOtherUserDetail();
+    geUserPersonalDetail();
   }
