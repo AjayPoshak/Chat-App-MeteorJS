@@ -15,6 +15,10 @@ function addcontactCtrl($scope, $rootScope, $location, $stateParams, chatService
       //console.log($rootScope.chatContacts);
       current = $rootScope.chatContacts;
   }
+  if(!$rootScope.userInfo){
+    $rootScope.userInfo = JSON.parse(localStorage.getItem("userDetails"));
+    console.log("getting from local...");
+  }
   console.log(current.data.blocks[0]);
   var blocks = [];
   var users = [];
@@ -85,16 +89,19 @@ function addcontactCtrl($scope, $rootScope, $location, $stateParams, chatService
   };
   $scope.SetGroup = function(){
     var addUsersGroup = {
+      user_id: $rootScope.userInfo.user_id,
+      apartment_id: $rootScope.userInfo.apartment_id,
       block_id: $scope.block_id,
       users: $scope.users
     };
     chatService.postUsersGroup(addUsersGroup)
       .success(function(response){
         console.log(response);
+        window.localStorage["groupData"] = angular.toJson(response);
+        $location.path('/group');
       })
       .error(function(err){
         console.log(err);
       });
-      $location.path('/chat');
   }
 };
