@@ -11,22 +11,30 @@ angular.module("chatApp")
      * {Same thing done at contactController.js}
      */
     var current = {};
-    if(!$rootScope.chatContacts){
-      current = $rootScope.chatContacts = JSON.parse(localStorage.getItem("userData"));
+    if(!$rootScope.groupContacts){
+      current = $rootScope.groupContacts = JSON.parse(localStorage.getItem("groupData"));
       console.log("getting from local...");
     }
     else{
         //console.log($rootScope.chatContacts);
-        current = $rootScope.chatContacts;
+        current = $rootScope.groupContacts;
     }
-    console.log(current.data.blocks[0]);
+
     var blocks = [];
     var users = [];
     $scope.userInfo = [];
     //console.log(current.data.blocks.length);
-    for(var i in current.data.blocks){
-      blocks[i] = current.data.blocks[i];
-      //console.log(current.blocks);
+    if(current.data != null && current.data != undefined){
+      for(var i in current.data.blocks){
+        blocks[i] = current.data.blocks[i];
+        //console.log(current.blocks);
+      }
+    }
+    else{
+      for(var i in current.blocks){
+        blocks[i] = current.blocks[i];
+        //console.log(current.blocks);
+      }
     }
     console.log(blocks[0]);
     for(var j in blocks){
@@ -90,9 +98,9 @@ angular.module("chatApp")
             };
             chatService.postNewGroup(newGroupData)
               .success(function(response){
-                console.log(response.data);
-                window.localStorage["userData"] = angular.toJson(response);
-                $location.path('/chat');
+                console.log(response);
+                window.localStorage["groupData"] = angular.toJson(response);
+                $location.path('/group');
               })
               .error(function(err){
                 console.log(err);
@@ -101,7 +109,6 @@ angular.module("chatApp")
           else{
             alert("Please select group members");
           }
-          //$location.path('/chat');
         }
         else{
           alert("Please enter group name...");
@@ -138,8 +145,8 @@ angular.module("chatApp")
         $scope.users.length--;
       }
       /*Printing users list - for debugging only*/
-      for(i in $scope.users){
+      /*for(i in $scope.users){
         console.log($scope.users[i]);
-      }
+      }*/
     }
 };
