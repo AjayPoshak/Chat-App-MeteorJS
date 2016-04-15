@@ -3,6 +3,7 @@ angular.module("chatApp")
   .controller('editgroupCtrl', editgroupCtrl);
 function editgroupCtrl($scope, $rootScope, $location, $window, $stateParams, $state, chatService) {
   $scope.blockData = JSON.parse($stateParams.blockDataParam);
+  console.log($scope.blockData);
   /*
    * Set data in rootscope when we are getting data through url parameter,
    * so that it can reused when we come back from next page, when there would be no
@@ -42,13 +43,16 @@ function editgroupCtrl($scope, $rootScope, $location, $window, $stateParams, $st
         };
         var updateGroupData = {
           user_id: currentUser.user_id,
+          apartment_id: currentUser.apartment_id,
           block_id: $scope.blockData.block_id,
           users: users
         };
+        console.log(updateGroupData);
         chatService.postUpdateGroup(updateGroupData)
           .success(function(response){
               console.log(response);
-              window.localStorage[$scope.blockData.block_name] = angular.toJson(response);
+              window.localStorage["groupData"] = angular.toJson(response);
+              $location.path('/group');
           })
           .error(function(err){
             console.log(err);
@@ -57,7 +61,6 @@ function editgroupCtrl($scope, $rootScope, $location, $window, $stateParams, $st
       else{
         alert("Please select the members to be removed");
       }
-      $location.path('/chat');
   }
 
   $scope.SelectUser = function(event, user_id){
