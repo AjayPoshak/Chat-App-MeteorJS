@@ -20,6 +20,12 @@
     width: 60px;
     height: 60px;
 }
+.ind-chat-date
+{
+     background: #FFDDAB!important;
+    padding: 7px;
+    border-radius: 5px;
+}
 *::-webkit-input-placeholder {
     color: black !important;
 }
@@ -213,13 +219,13 @@ input[type="text"], input[type="password"] {
   color: #fff;
 }
 .display-inline {
-	display: inline;
+  display: inline;
 }
 .time-stamp {
-	font-size: 75%;
+  font-size: 75%;
 }
 .float-right {
-	float: right;
+  float: right;
 }
 .float-left {
   float: left;
@@ -273,8 +279,12 @@ input[type="text"], input[type="password"] {
   width: 26px;
 }
 .button-show-attachment input[type="file"]{
-  filter: alpha(opacity:0);
-  opacity: 0;
+    opacity: 0;
+    position: absolute;
+    left: -50px;
+    height: 45px;
+    max-width: 100px;
+    margin-top: -10px;
 }
 .button-create-group
 {
@@ -330,13 +340,6 @@ input[type="text"], input[type="password"] {
     height: 12px;
     padding-right: 5px;
 }
-.send-message-text-area
-{
-    margin-left: 15px;
-    background: #fff !important;
-    border: 2px solid #848484 !important;
-    color: #000 !important;
-}
 .a-class-border
 {
     border-bottom: 2px solid #DCDCDC
@@ -368,13 +371,6 @@ input[type="text"], input[type="password"] {
     text-align: center;
     vertical-align: middle;
     border-top:2px solid #DCDCDC;
-}
-.send-message-text-area
-{
-    margin-left: 15px;
-    background: #fff !important;
-    border: 2px solid #848484 !important;
-    color: #000 !important;
 }
 .a-class-border
 {
@@ -439,6 +435,7 @@ input[type="text"], input[type="password"] {
 .h2-font-weight
 {
     font-weight: 600 !important;
+    color: #000;
 }
 .welcome-img img {
   height: 25px;
@@ -624,13 +621,13 @@ input[type="text"], input[type="password"] {
   color: #fff;
 }
 .display-inline {
-	display: inline;
+  display: inline;
 }
 .time-stamp {
-	font-size: 75%;
+  font-size: 75%;
 }
 .float-right {
-	float: right;
+  float: right;
 }
 .float-left {
   float: left;
@@ -700,6 +697,7 @@ input[type="text"], input[type="password"] {
     background: #fff !important;
     border: 2px solid #848484 !important;
     color: #000 !important;
+    width: 70%;
 }
 .a-class-border
 {
@@ -729,6 +727,9 @@ input[type="text"], input[type="password"] {
 .attachment-popup div span {
   width: 50%;
 }
+.bar-footer {
+  overflow: visible !important;
+}
 
 .attachment-popup div span img {
   display: block;
@@ -753,16 +754,31 @@ input[type="text"], input[type="password"] {
 .grey-background {
   background: #848484;
   border-color: #848484;
-  height: 70%;
   width: 100%;
+  display: table;
+  position: relative;
   vertical-align: middle;
+  padding: 0px 13px;
+}
+.setting-no-div
+{
+  display: table-cell; 
+  vertical-align: middle;
+}
+.ion-height
+{
+  height: 29.5% !important;
+}
+.ion-non-height
+{
+  height: 17.6%;
 }
 .fromName {
   float: right;
   font-size: 11px;
   display: inline-block;
   width: 100%;
-  padding-left: 60%;
+  padding-left: 21%;
 }
 .time-stamp {
   float: right;
@@ -774,4 +790,8 @@ input[type="text"], input[type="password"] {
   text-align: center;
   font-weight: 600;
   margin-top: 3%;
+}
+.edit-search
+{
+  margin-left: 7% !important;
 }

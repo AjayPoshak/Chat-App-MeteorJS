@@ -2,19 +2,20 @@
   <ion-header-bar class="bar bar-header">
     <div class="ion-header" style="width: 100%">
       <div class="">
-        <button class="button button-icon icon button-back" ng-click="BacktoGroup()"></button>
-        <button class="button chat-user-name" style="margin-left: 10%;">{{blockData.block_name}}</button>
-        <button ng-show="blockData.type == 'personal'" class="button button-icon icon button-edit-group custom-button-group float-right" ng-click="editGroup()">
+        <button class="button button-icon icon button-back" ng-click="BacktoGroup()" style="width: 40px;margin-top: 10px;"></button>
+        <button class="button chat-user-name" style="margin-top: -2.5px !important;">{{blockData.block_name}}</button>
+        <p class="" ng-show="blockData.type == 'personal'" style=" margin-top: -12px;color: white;"><span style="margin-left: 17%">{{AdminInfo.Fname}}</span></p>
+        <button ng-show="isUserOwner && blockData.type == 'personal'" class="button button-icon icon button-edit-group custom-button-group float-right" style="width: 40px;margin-top:-50px;" ng-click="editGroup()">
         </button>
       </div>
     </div>
   </ion-header-bar>
   <ion-content>
     <div class="create-group-div">
-      <input ng-model="search" type="text" class="search-area-class-filter form-control" placeholder="Search...">
+      <input ng-model="search" type="text" class="search-area-class-filter edit-search form-control" placeholder="Search...">
     </div>
     <ion-list>
-      <a class="item item-avatar a-class-border" ng-repeat="user in blockData.users | filter:search" ng-click="changePath(user)">
+      <a class="item item-avatar a-class-border" ng-repeat="user in blockData.users | filter:search | orderBy:'username'" ng-click="changePath(user)">
         <img ng-src="{{user.profile_image}}">
         <h2 class="display-inline item-center-list">{{user.username}}</h2>
       </a>

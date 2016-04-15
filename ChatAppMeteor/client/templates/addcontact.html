@@ -2,18 +2,18 @@
   <ion-header-bar class="bar bar-header">
     <div class="ion-header" style="width: 100%">
       <div class="">
-        <button class="button button-icon icon button-back" ng-click="BacktoEditGroup()"></button>
-        <button class="button chat-user-name" style="margin-left: 10%;">Friends1</button>
-        <button class="button button-icon icon button-create float-right" ng-click="SetGroup()"></button>
+        <button class="button button-icon icon button-back" ng-click="BacktoEditGroup()" style="margin-top: 10px;width: 40px;"></button>
+        <button class="button chat-user-name" style="margin-top: 9px !important;">{{blockData.block_name}}</button>
+        <button class="button button-icon icon button-create float-right" ng-click="SetGroup()" style="    margin-right: 6%; margin-top:6px;width: 40px;"></button>
       </div>
     </div>
   </ion-header-bar>
   <ion-content>
     <div class="create-group-div">
-     <input type="text" ng-model="search" class="search-area-class-filter form-control" placeholder="Search...">
+     <input type="text" ng-model="search" class="search-area-class-filter edit-search form-control" placeholder="Search...">
     </div>
     <ion-list>
-      <a class="item item-avatar a-class-border" ng-click="changePath()" ng-repeat="user in userInfo| filter:search">
+      <a class="item item-avatar a-class-border" ng-click="changePath()" ng-repeat="user in userInfo | filter:search | orderBy:'username'" >
         <img ng-src="{{user.profile_image}}">
         <h2 class="display-inline item-center-list">{{user.username}}</h2>
         <button class="button button-icon button-select-user icon custom-button-group float-right" ng-click="SelectUser($event, user.user_id)"></button>

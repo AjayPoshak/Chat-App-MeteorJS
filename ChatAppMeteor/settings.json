@@ -1,0 +1,10 @@
+{
+  "galaxy.meteor.com": {
+    "env": {
+
+      "ROOT_URL": "http://chat.citze.in",     
+      "MONGO_URL": "mongodb://admin:Aajaay09+@ds011830.mlab.com:11830/chatapp"
+    }
+  }
+  
+}

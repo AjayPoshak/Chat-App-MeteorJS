@@ -2,28 +2,28 @@
   <ion-header-bar class="bar bar-header">
       <div class="ion-header" style="width: 100%">
           <div style="margin-top: 2%;">
-              <button class="button button-icon icon button-back" ng-click="BacktoChat()"></button>
-              <button class="button chat-user-name" style="margin-left: 10%; margin-top: -4px !important;">Groups</button>
-              <button class="button button-icon icon button-create-group float-right" ng-click="CreateGroup()"></button>
+              <button class="button button-icon icon button-back" style="width: 40px;" ng-click="BacktoChat()"></button>
+              <button class="button chat-user-name" style="margin-top: -2px !important;">Groups</button>
+              <button class="button button-icon icon button-create-group float-right" style="margin-right: 10px;width: 40px;" ng-click="CreateGroup()"></button>
           </div>
       </div>
   </ion-header-bar>
   <ion-content>
       <div class="default-group-class" style="padding-top: 10px;">Default</div>
       <ion-list>
-          <a class="item item-avatar a-class-border" ng-repeat="defaultBlock in defaultBlocks">
-              <img src="images/satya.jpg" style="margin-top: 10px;">
-              <h2 class="display-inline item-center-list h2-font-wieght" style="width:60%;margin-top: 8px;" ng-click="changePath(defaultBlock)">{{defaultBlock.block_name}}</h2>
+          <a class="item item-avatar a-class-border" ng-repeat="defaultBlock in defaultBlocks | orderBy:'block_name'" style="padding-left: 0">
+              <h3 class="display-inline item-center-list h2-font-wieght" style="width:60%;margin-left: 15px; margin-top: 8px;font-weight:700;" ng-click="changePath(defaultBlock)">{{defaultBlock.block_name}}</h3>
               <button class="button button-icon icon button-expand-group custom-button-group float-right" ng-click="expandGroup(defaultBlock)"></button>
           </a>
       </ion-list>
       <ion-list>
           <div class="default-group-class" style="height: 27px;">Personal</div>
-          <a class="item item-avatar a-class-border" ng-repeat="personalBlock in personalBlocks">
-              <img src="images/rajni.jpg" style="margin-top: 10px;">
-              <h2 class="display-inline item-center-list h2-font-wieght" style="width:60%;margin-top: 8px;" ng-click="changePath(personalBlock)">{{personalBlock.block_name}}</h2>
+          <div class="" ng-if="personalBlocks.length>0">
+          <a class="item item-avatar a-class-border"  ng-repeat="personalBlock in personalBlocks | orderBy:'block_name'" style="padding-left: 0" ng-hide="personalBlocks.length === 0">
+              <h3 class="display-inline item-center-list h2-font-wieght" style="width:60%; margin-left: 15px; margin-top: 8px;font-weight:700;" ng-click="changePath(personalBlock)">{{personalBlock.block_name}}</h3>
               <button class="button button-icon icon button-expand-group custom-button-group float-right" ng-click="expandGroup(personalBlock)"></button>
           </a>
+          </div>
       </ion-list>
   </ion-content>
   <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer" style="background:#848484;">

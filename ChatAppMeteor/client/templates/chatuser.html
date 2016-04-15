@@ -1,6 +1,6 @@
 <style>
 	.list {
-		height: 31.5%;
+		height: 100%;
 	}
 	::-webkit-input-placeholder {
     color: #000;
@@ -8,14 +8,32 @@
 :-moz-placeholder {
     color: #000;
 }
+.scroll {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
 .chat {
     width: 100%;
 }
 
+input::-webkit-input-placeholder { /* WebKit browsers */
+  line-height: 1.5em;
+}
+input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  line-height: 1.5em;
+}
+input::-moz-placeholder { /* Mozilla Firefox 19+ */
+  line-height: 1.5em;
+}
+input:-ms-input-placeholder { /* Internet Explorer 10+ */
+  line-height: 1.5em;
+}
 .bubble{
     background-color: #F2F2F2;
-    border-radius: 5px;
-    box-shadow: 0 0 6px #B2B2B2;
+    border-radius: 0px;
+    box-shadow: 0 0 3px #B2B2B2;
     display: inline-block;
     padding: 10px 18px;
     position: relative;
@@ -43,6 +61,8 @@
 		background: #FFDDAB !important;
 		max-width: 60%;
 		clear: both;
+		width: 60%;
+    display: inline-block;
 }
 
 .me::before {
@@ -58,6 +78,8 @@
 		max-width: 60%;
 		display: block;
 		clear: both;
+		width: 60%;
+    display: inline-block;
 }
 
 .you::before {
@@ -65,72 +87,93 @@
     left: -8px;
 		background: #DCDCDC !important;
 }
+textarea {
+      padding: 0px;
+      width: 300px;
+      margin-left: 15px;
+      background: #eeeeee;
+      max-width: 90%;
+    }
+    .animate:focus {
+      -webkit-transition: height 50ms ease-in-out;
+         -moz-transition: height 50ms ease-in-out;
+           -o-transition: height 50ms ease-in-out;
+              transition: height 50ms ease-in-out;
+    }
 </style>
 <section style="height: 100%;">
 	<ion-header-bar class="bar bar-header">
-	  <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="myGoBack()"></button>
+	  <button style="margin-top: 2%;width: 60px;" class="button button-icon icon button-back" ng-click="myGoBack()"></button>
 	  <img ng-src="{{paramDetails.profile_image}}" class="chat-user-image" style="margin-top: 1%;">
-	  <span class="chat-user-name" style="margin-top: 3% !important;" ng-show="individualChatFlag">{{paramDetails.username}}</span>
-		<span class="chat-user-name" style="margin-top: 3% !important;" ng-hide="individualChatFlag">{{groupDetails.block_name}}</span>
-		<button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="margin-left:37%;width: 100%" ng-show="displaySideBar" ng-click="toggleSideBar()"></button>
-		<button style="margin-top: 2%;margin-right: 20px;" class="button button-icon icon custom-button-group button-setting toggle-class-left chat-user-setting" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
+	  <span class="chat-user-name" style="margin-top: 2% !important;width: 70%" ng-show="individualChatFlag">{{paramDetails.username}}</span>
+		<span class="chat-user-name" style="margin-top: 2% !important;width: 70%" ng-hide="individualChatFlag">{{groupDetails.block_name}}</span>
+		<button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left"  ng-show="displaySideBar" ng-click="toggleSideBar()" style="margin-right: 20px;width: 40px;"></button>
+		<button style="margin-top: 2%;margin-right: 20px;width: 40px;" class="button button-icon icon custom-button-group button-setting toggle-class-left chat-user-setting" ng-show="!displaySideBar" ng-click="toggleSideBar()"></button>
 	</ion-header-bar>
-	<ion-content delegate-handle="chatScroll">
-  	<div class="chat" ng-show="individualChatFlag" ng-repeat="msg in chatMessages">
+	<ion-content overflow-scroll="true" delegate-handle="chatScroll" style="margin-top: 14px;" id="userMessagesView" jqTable>
+	<!-- segregate by date here using angular Groupby-->
+	<div ng-show="individualChatFlag">
+    <div ng-repeat="(key, value) in chatMessages | groupBy:'todaysdate'">
+            <b>{{key}}</b>
+  	<div class="chat"  ng-repeat="msg in value | limitTo:chatLimit">
 			<div>
 			<div style="width: 100%;">
-      	<div class="bubble me" ng-hide="msg.message == '' && msg.imageId == 0"
+      	<div class="bubble me" ng-hide="(msg.message == '' || msg.message == null) && msg.imageId == 0"
 				 ng-if="(msg.from==userInfo.user_id && msg.to==paramDetails.user_id) || (msg.from==userInfo.user_id &&
 				 msg.to == '-1' && (msg.blockedId == paramDetails.user_id || msg.blockedId == userInfo.user_id))">
-					<span>{{msg.message}}</span>
+					<span class="scroll">{{msg.message}}</span>
 					<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
 						<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt" ng-src="{{image.url()}}">
 					</div>
-					<span class="time-stamp" am-time-ago="msg.createdAt"></span>
-					<span ng-show="msg.msgReached"><img src="images/Blue-tick2.png" class="tick-image-class"></span>
+					<span class="time-stamp">{{msg.createdAt | amDateFormat: 'hh:mm A'}}</span>
+					<span ng-show="msg.msgReached" style="float: right;"><img src="images/Blue-tick2.png" class="tick-image-class"></span>
 				</div>
 			</div>
 			<!-- <div style="width: 100%;" ng-hide="msg.to == '-1' && msg.from == userInfo.user_id"> -->
 			<div style="width: 100%;">
-				<div class="bubble you" ng-hide="msg.message == '' && msg.imageId == 0"
+				<div class="bubble you"  ng-hide="(msg.message == '' || msg.message == null) && msg.imageId == 0"
 				 ng-if="msg.from==paramDetails.user_id && msg.to==userInfo.user_id">
-					<span>{{msg.message}}</span>
+					<span class="scroll">{{msg.message}}</span>
 						<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
 							<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt"
 							 ng-src="{{image.url()}}">
-
 						 </div>
-						 <span class="time-stamp" am-time-ago="msg.createdAt"></span>
+						 <span class="time-stamp">{{msg.createdAt | amDateFormat: 'hh:mm A'}}</span>
+					 </div>
+				 </div>
+       </div>
+			 </div>
+</div>
+</div>
+<div class="" ng-hide = "individualChatFlag">
+
+	<div class="chat" ng-repeat="msg in chatMessages | limitTo:chatLimit">
+		<div>
+		<div style="width: 100%;">
+			<div class="bubble me" ng-hide="(msg.message == '' || msg.message == null) && msg.imageId == 0"
+			 ng-if="msg.from==userInfo.user_id && msg.to==groupDetails.block_id">
+				<span class="scroll">{{msg.message}}</span>
+				<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
+					<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt" ng-src="{{image.url()}}">
+				</div>
+				<span class="time-stamp">{{msg.createdAt | amDateFormat: 'hh:mm A'}}</span>
+				<span ng-show="msg.msgReached" style="float: right;"><img src="images/Blue-tick2.png" class="tick-image-class"></span>
+			</div>
+		</div>
+		<div style="width: 100%;">
+			<div class="bubble you" ng-hide="(msg.message == '' || msg.message == null) && msg.imageId == 0"
+			 ng-if="msg.to==groupDetails.block_id && msg.from != userInfo.user_id">
+			  <span class="fromName">~{{msg.fromName}}</span>
+				<span class="scroll">{{msg.message}}</span>
+				<span class="time-stamp">{{msg.createdAt | amDateFormat: 'hh:mm A'}}</span>
+					<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
+						<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt"
+						 ng-src="{{image.url()}}">
+						 <span class="time-stamp">{{msg.createdAt | amDateFormat: 'hh:mm A'}}</span>
 					 </div>
 				 </div>
 			 </div>
 		 </div>
-
-	<div class="chat" ng-show="!individualChatFlag" ng-repeat="msg in chatMessages">
-		<div>
-		<div style="width: 100%;">
-			<div class="bubble me" ng-hide="msg.message == '' && msg.imageId == 0"
-			 ng-if="msg.from==userInfo.user_id && msg.to==groupDetails.block_id">
-				<span>{{msg.message}}</span>
-				<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
-					<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt" ng-src="{{image.url()}}">
-				</div>
-				<span class="time-stamp" am-time-ago="msg.createdAt"></span>
-			</div>
-		</div>
-		<div style="width: 100%;">
-			<div class="bubble you" ng-hide="msg.message == '' && msg.imageId == 0"
-			 ng-if="msg.to==groupDetails.block_id && msg.from != userInfo.user_id">
-			  <span class="fromName">~{{msg.fromName}}</span>
-				<span>{{msg.message}}</span>
-					<div ng-if="msg.imageId != 0" ng-show="msg.imageId == image._id" ng-repeat="image in imageMessages">
-						<!-- <span class="fromName">~{{msg.fromName}}</span> -->
-						<img style="height: 170px; width: 170px;" ng-if="msg.createdAt < image.uploadedAt"
-						 ng-src="{{image.url()}}">
-						 <span class="time-stamp" am-time-ago="msg.createdAt"></span>
-					 </div>
-				 </div>
-			 </div>
 		 </div>
 			<!-- <div style="width: 100%;" ng-repeat="msg in chatMessages">
       	<div class="bubble me" ng-if="msg.from==userInfo.user_id && msg.to==groupDetails.block_id">
@@ -145,44 +188,64 @@
 					<span class="time-stamp" am-time-ago="msg.createdAt"></span>
 				</div>
 			</div> -->
+
 		</div>
 	</ion-content>
-  <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer">
+  <ion-footer-bar keyboard-attach="" class="bar-stable bar-footer item-input-inset bar bar-footer">
 		<!--button class="button button-icon icon button-show-attachemnt"
 		ng-click="showAttachment()" style="margin-left: -1%;"></button-->
-		<span class="button-show-attachment">
+		<span class="button-show-attachment" style="width: 45px;">
 			<!--input type="file" accept="image/*" ng-click="uploadImage()"
 			class="button button-icon icon" style="margin-left: -1%;"-->
 			<!--input type="file" class="button"  ngf-select="" ngf-change="addImages($files)" ngf-multiple="false"
 			ngf-allow-dir="false" ngf-accept="'image/*'"-->
 			<input type="file" ngf-select="" name="file" ngf-accept="'image/*'" accept="image/*"
-			ngf-change="sendMessage($files)" style="width: inherit;" >
+			ngf-change="sendMessage($files)">
 		</span>
-		<input type="text" class="send-message-text-area" placeholder="Type message" ng-model="enterMessage"
-		ng-focus="inputUp()" ng-blur="inputDown()">
-		<button type="submit" class="emoticons-class"><img src="images/emoticon85.png" alt="Arrow Icon"></button>
-    <button class="button button-clear" style="margin-left:0; width: 20%; margin-right: -3%;margin-top: 7px;" ng-click="sendMessage()">
-		<img src="images/Send.png" alt="send" />
+		<textarea class="animate msd-elastic: \n;" ng-maxlength="200"  placeholder="Type message" ng-model="enterMessage" ng-focus="inputUp()" ng-blur="inputDown()" style="height: 34px;"></textarea>
+		<button type="submit" class="emoticons-class" style=""><img src="images/emoticon85.png" alt="Arrow Icon" style="height: 27px;"></button>
+    <button class="button button-clear" ng-click="sendMessage()">
+		<img src="images/Send.png" alt="sendimage" />
 	</button>
 </ion-footer-bar>
 
 <div class="float-right" id="settings-popup" ng-show="displaySideBar">
 		<ion-list style="background: #848484; height: 100%;">
-			<ion-item class="grey-background" ng-click="toggleSideBar();">
-      	<img class="settings-images" src="images/Main_Contacts.png" style="margin-top:40px !important;" alt="contact info" />
+			<ion-item class="grey-background ion-non-height" ng-click="toggleSideBar();showUserInfo()" ng-class="{'ion-height': individualChatFlag}">
+			<div class="setting-no-div" ng-class="{'setting-div': individualChatFlag}">
+      	<img class="settings-images" src="images/Main_Contacts.png" alt="contact info"/>
 				<span class="settings-text">Contact Info</span>
+				</div>
 			</ion-item>
-			<ion-item class="grey-background" ng-click="toggleSideBar();">
-				<img class="settings-images" src="images/Settings_Call.png" style="margin-top:20px !important;" alt="call" />
+			<ion-item class="grey-background ion-non-height" ng-click="toggleSideBar();GetotherPhonenumber()" ng-class="{'ion-height': individualChatFlag}">
+			<div class="setting-no-div">
+				<img class="settings-images" src="images/Settings_Call.png" alt="call" />
 				<span class="settings-text">Call</span>
+				</div>
 			</ion-item>
-			<ion-item class="grey-background" ng-click="blockUser();toggleSideBar();">
-				<img class="settings-images" src="images/Settings_Block.png" style="margin-top:0px !important;" alt="block" />
+			<ion-item class="grey-background ion-non-height" ng-show="UserisBlocked" ng-click="unBlockUser();toggleSideBar();" ng-class="{'ion-height': individualChatFlag}">
+			<div class="setting-no-div">
+				<img class="settings-images" src="images/Settings_Block.png" alt="block" />
+				<span class="settings-text">UnBlock</span>
+				</div>
+			</ion-item>
+			<ion-item class="grey-background ion-non-height" ng-hide="UserisBlocked" ng-click="blockUser();toggleSideBar();" ng-class="{'ion-height': individualChatFlag}">
+			<div class="setting-no-div">
+				<img class="settings-images" src="images/Settings_Block.png" alt="block" />
 				<span class="settings-text">Block</span>
+				</div>
 			</ion-item>
-			<ion-item class="grey-background" ng-click="toggleSideBar();">
-				<img class="settings-images" src="images/Settings_Tools.png" style="margin-top:0px !important;" alt="settings" />
+			<ion-item class="grey-background ion-non-height" ng-hide="individualChatFlag" ng-click="toggleSideBar();" ng-class="{'ion-height': individualChatFlag}">
+			<div class="setting-no-div">
+				<img class="settings-images" src="images/Settings_Tools.png" alt="settings" />
 				<span class="settings-text">Settings</span>
+				</div>
+			</ion-item>
+			<ion-item class="grey-background ion-non-height" ng-hide="individualChatFlag" ng-click="logOut();" ng-class="{'ion-height': individualChatFlag}">
+			<div class="setting-no-div">
+				<img class="settings-images" src="images/Settings_Tools.png" alt="settings" />
+				<span class="settings-text">Log Out</span>
+				</div>
 			</ion-item>
 		</ion-list>
 	</div>

@@ -1,6 +1,6 @@
 <style>
 .list {
-  height: 31.5%;
+  height: 100%;
 }
 span > img{
   position: absolute;
@@ -13,57 +13,72 @@ span > img{
   border-radius: 50%;
 }
 </style>
-<section style="height:100%">
+<span ng-if="isLoading" style="position: absolute; margin-top: 30px; left: 44%; z-index: 1000;">
+  <ion-spinner></ion-spinner>
+</span>
+<section style="height:100%" ng-if="!isLoading">
   <ion-header-bar class="bar bar-header">
       <div class="ion-header" style="width: 100%">
           <div class="" ng-hide="isSearchtrue" style="margin-right: 15px;">
-              <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" ng-if="displaySideBar" ng-click="toggleSideBar()"></button>
-              <button class="button button-icon icon  button-setting custom-button-group toggle-class-left" ng-if="!displaySideBar" ng-click="toggleSideBar()"></button>
-              <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="goToGroup()"></button>
-              <button class="button button-icon icon button-user custom-button-group toggle-class-left" ng-click="goToContact()"></button>
-              <button class="button button-icon icon button-search custom-button-group toggle-class-left" ng-click="showsearchBar()"></button>
+              <button class="button button-icon icon  close-button-setting custom-button-group toggle-class-left" style="width: 50px" ng-if="displaySideBar" ng-click="toggleSideBar()"></button>
+              <button class="button button-icon icon  button-setting custom-button-group toggle-class-left" ng-if="!displaySideBar" ng-click="toggleSideBar()" style="width: 40px"></button>
+              <button class="button button-icon icon button-group custom-button-group toggle-class-left" ng-click="goToGroup()" style="width: 40px"></button>
+              <button class="button button-icon icon button-user custom-button-group toggle-class-left" ng-click="goToContact()" style="width: 40px"></button>
+              <button class="button button-icon icon button-search custom-button-group toggle-class-left" ng-click="showsearchBar()" style="width: 40px"></button>
           </div>
           <div ng-show="isSearchtrue">
-              <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="hideSearchbar()"></button>
+              <button style="margin-top: 2%;" class="button button-icon icon button-back" ng-click="hideSearchbar();search=null" ></button>
               <input type="text" ng-model="search" class="search-area-class js-filter  form-control" placeholder="Search...">
           </div>
       </div>
   </ion-header-bar>
   <ion-content>
     <ion-list>
-      <span ng-if="isLoading" sytle="position: absolute; top:128%; left:50%; z-index: 1000;">
-        <ion-spinner></ion-spinner>
-      </span>
-      <a class="item item-avatar a-class-border" ng-repeat="recent in recentMessages| filter: search">
-          <span ng-if="recent.sender.user_id != current.user_id && recent.groupMessage == false" ng-click="changePath(recent.sender)">
+      <a class="item item-avatar a-class-border" ng-repeat="recent in recentMessages| filter: search" ng-click="changePath(recent)">
+          <span ng-if="recent.sender.user_id != current.user_id && recent.groupMessage === false" >
             <img ng-src="{{recent.sender.profile_image}}">
-            <h2 class="display-inline h2-font-weight">{{recent.sender.username}}</h2>
-            <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
+            <p class="display-inline h2-font-weight">{{recent.sender.username}}</p>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') == todayDate">{{ recent.createdAt | amDateFormat: 'hh:mm A' }}</span>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') != todayDate">{{ recent.createdAt | amDateFormat: 'DD/MM/YYYY' }}</span>
             <p style="padding-top: 5px;">
                 <img ng-if="recent.msgReached" src="images/Blue-tick2.png" class="tick-image-class">
                 <span>{{recent.message}}</span>
             </p>
           </span>
-          <span ng-if="recent.receiver.user_id != current.user_id && recent.groupMessage == false" ng-click="changePath(recent.receiver)">
+          <span ng-if="recent.receiver.user_id != current.user_id && recent.groupMessage === false" ng-click="changePath(recent)">
             <img ng-src="{{recent.receiver.profile_image}}">
-            <h2 class="display-inline h2-font-wieght">{{recent.receiver.username}}</h2>
-            <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
+            <p class="display-inline h2-font-weight">{{recent.receiver.username}}</p>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') == todayDate">{{ recent.createdAt | amDateFormat: 'hh:mm A' }}</span>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') != todayDate">{{ recent.createdAt | amDateFormat: 'DD/MM/YYYY' }}</span>
             <p style="padding-top: 5px;">
                 <img ng-if="recent.msgReached" src="images/Blue-tick2.png" class="tick-image-class">
                 <span>{{recent.message}}</span>
             </p>
           </span>
 
-          <span ng-if="recent.groupMessage == true" ng-click="changePath(recent.receiver)">
-            <img ng-src="{{recent.receiver.profile_image}}">
-            <h2 class="display-inline h2-font-wieght">{{recent.sender}}</h2>
-            <span class="time-stamp float-right" am-time-ago="recent.createdAt"></span>
+          <span ng-if="recent.groupMessage === true && recent.sender === current.user_id" ng-click="changePath(recent)">
+          <img src="images/group_icon.png" style="margin-top: -7px;">
+            <p class="display-inline h2-font-weight">{{recent.sender}}</p>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') == todayDate">{{ recent.createdAt | amDateFormat: 'hh:mm A' }}</span>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') != todayDate">{{ recent.createdAt | amDateFormat: 'DD/MM/YYYY' }}</span>
             <p style="padding-top: 5px;">
-                <img src="images/Blue-tick2.png" class="tick-image-class">
+                <span>{{recent.message}}</span>
+            </p>
+          </span>
+          <span ng-if="recent.groupMessage === true && recent.sender !== current.user_id" ng-click="changePath(recent)">
+            <p class="display-inline h2-font-weight">{{recent.sender}}</p>
+            <img src="images/group_icon.png" style="margin-top: -7px;">
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') == todayDate">{{ recent.createdAt | amDateFormat: 'hh:mm A' }}</span>
+            <span class="time-stamp float-right" ng-if="(recent.createdAt | amDateFormat: 'DD/MM/YYYY') != todayDate">{{ recent.createdAt | amDateFormat: 'DD/MM/YYYY' }}</span>
+            <p style="padding-top: 5px;">
                 <span>{{recent.message}}</span>
             </p>
           </span>
       </a>
+      <div ng-if="recentMessages.length === 0" style="position: absolute; margin-top: 30px; left: 32%;">
+         <!--  <p>{{NoRecentConversation}}</p> -->
+         <ion-spinner></ion-spinner>
+      </div>
   </ion-list>
   </ion-content>
   <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset bar bar-footer" style="background:#848484;">
@@ -73,22 +88,30 @@ span > img{
   </ion-footer-bar>
   <div class="float-right" id="settings-popup" ng-show="displaySideBar">
   	<ion-list style="background: #848484; height: 100%;">
-  		<ion-item class="grey-background" ng-click="toggleSideBar()">
-          <img class="settings-images" src="images/Main_Contacts.png" style="margin-top:40px !important;" alt="contact info" />
-  			<span class="settings-text">Contact Info</span>
+  		<ion-item class="grey-background ion-height" ng-click="toggleSideBar();showUserInfo()">
+      <div class="setting-no-div">
+          <img class="settings-images" src="images/Main_Contacts.png" alt="contact info" />
+  			<span class="settings-text">My Info</span>
+        </div>
   		</ion-item>
-  		<ion-item class="grey-background" ng-click="toggleSideBar()">
-  			<img class="settings-images" src="images/Settings_Call.png" style="margin-top:20px !important;" alt="call" />
-  			<span class="settings-text">Call</span>
+  		<ion-item class="grey-background ion-height" ng-show="isNotificationOn" ng-click="toggleSideBar();offNotification()">
+      <div class="setting-no-div">
+  			<img class="settings-images" ng-src="images/noti_on.png"  alt="settings" style="height: 24px;width: 24px;" />
+  			<span class="settings-text">Notification</span>
+        </div>
   		</ion-item>
-  		<ion-item class="grey-background" ng-click="toggleSideBar()">
-  			<img class="settings-images" src="images/Settings_Block.png" style="margin-top:0px !important;" alt="block" />
-  			<span class="settings-text">Block</span>
-  		</ion-item>
-  		<ion-item class="grey-background" ng-click="toggleSideBar()">
-  			<img class="settings-images" src="images/Settings_Tools.png" style="margin-top:0px !important;" alt="settings" />
-  			<span class="settings-text">Settings</span>
-  		</ion-item>
+        <ion-item class="grey-background ion-height" ng-hide="isNotificationOn" ng-click="toggleSideBar();onNotification()">
+      <div class="setting-no-div">
+        <img class="settings-images" ng-src="images/noti_off.png" style="height: 24px;width: 24px;" alt="settings" />
+        <span class="settings-text">Notification</span>
+        </div>
+      </ion-item>
+      <ion-item class="grey-background ion-height" ng-click="logOut();">
+      <div class="setting-no-div">
+        <img class="settings-images" src="images/Settings_Tools.png"  alt="settings" />
+        <span class="settings-text">Log Out</span>
+        </div>
+      </ion-item>
   	</ion-list>
   </div>
 </section>

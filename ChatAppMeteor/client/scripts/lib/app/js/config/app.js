@@ -1,6 +1,9 @@
-angular.module('chatApp',['angular-meteor','ionic','ngResource','angularMoment', 'ngFileUpload','ngSanitize']);
+angular.module('chatApp',['angular-meteor','ionic','ngResource','angularMoment','luegg.directives','angular.filter', 'ngFileUpload','ngSanitize']);
 angular.module("chatApp")
-.config(function($stateProvider,$urlRouterProvider){
+.config(function($stateProvider,$urlRouterProvider, $ionicConfigProvider){
+  if (ionic.Platform.isAndroid()){
+       $ionicConfigProvider.scrolling.jsScrolling(false);
+     }
     $stateProvider
             .state('login',{url:'/login',cache: false,templateUrl:'client/templates/login.html',controller:'loginCtrl'})
             .state('chat',{url:'/chat',cache: false,templateUrl:'client/templates/chat.html',controller:'chatCtrl'})

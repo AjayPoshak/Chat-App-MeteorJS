@@ -12,7 +12,7 @@
     {
       month = '0' + month;
     }
-    var todayDate = (day + "/" + month + "/" + year);
+    var todayDate = (month + "/" + day + "/" + year);
 Meteor.methods({
   'insertMessage': function(rec_id, sender_id, msg, image_id, blockedId, connectionStatus){
     var chatId = Chats.insert({
@@ -104,7 +104,7 @@ Meteor.methods({
         _id: chatId
       },{
         $set: {msgReached: true}
-      });  
+      });
     }}
     /*Update recent messages for group conversation.*/
     else {
@@ -112,7 +112,7 @@ Meteor.methods({
       var anyGroupConversation = Messages.findOne({
       $and: [{
               "to": rec_id,
-              "groupMessage": true        
+              "groupMessage": true
           }]
       });
       console.log(anyGroupConversation);
@@ -142,8 +142,8 @@ Meteor.methods({
             createdAt: new Date()
           }
         });
-      }  
-        
+      }
+
     }
     if(connectionStatus === "online"){
           Messages.update({
@@ -152,7 +152,7 @@ Meteor.methods({
             $set: {msgReached: true}
           });
         }
-    
+
   },
   'insertBlockUser': function(blocked, blockedBy){
     BlockedUsers.insert({
